@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { useTheme } from "./ThemeProvider";
-import { useScramble } from "./useScramble";
+import { useScramble, useScrambleLoop } from "./useScramble";
 
 export default function Home() {
   const { theme, toggleTheme } = useTheme();
@@ -11,12 +11,14 @@ export default function Home() {
   const footerRef = useRef<HTMLElement>(null);
 
   useScramble(titleRef, { duration: 3000, interval: 30, charset: "all", uppercase: true });
+  useScrambleLoop(titleRef, { duration: 400, interval: 20, charset: "all", uppercase: true, minDelay: 30000, maxDelay: 60000 });
   useScramble(footerRef, { duration: 3000, interval: 30, charset: "all", uppercase: true });
 
   useEffect(() => {
     const timer = requestAnimationFrame(() => setVisible(true));
     return () => cancelAnimationFrame(timer);
   }, []);
+
 
   return (
     <>
@@ -50,7 +52,7 @@ export default function Home() {
             &mdash; fintech-native partner helping teams build the future of finance.
           </p>
           <p>
-            I like building things &mdash; agents, security tools, compilers,
+            I like building things. Agents, security tools, compilers,
             voice interfaces, whatever&apos;s useful.
           </p>
         </div>

@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import { useTheme } from "../ThemeProvider";
-import { useScramble, useScrambleOnHover } from "../useScramble";
+import { useScramble } from "../useScramble";
 
 const categories = [
   {
@@ -130,8 +130,19 @@ const categories = [
 export default function Projects() {
   const { theme, toggleTheme } = useTheme();
   const [visible, setVisible] = useState(false);
+  const [currentRepo, setCurrentRepo] = useState<string | null>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const footerRef = useRef<HTMLElement>(null);
+
+  const fetchStatus = useCallback(async () => {
+    try {
+      const res = await fetch("/api/status");
+      const data = await res.json();
+      if (data.repo?.name) {
+        setCurrentRepo(data.repo.name);
+      }
+    } catch {}
+  }, []);
 
   useScramble(titleRef, {
     duration: 3000,
@@ -146,16 +157,15 @@ export default function Projects() {
     uppercase: true,
   });
 
-  const { onMouseEnter } = useScrambleOnHover({
-    duration: 600,
-    interval: 25,
-    charset: "alphanumeric",
-  });
 
   useEffect(() => {
     const timer = requestAnimationFrame(() => setVisible(true));
     return () => cancelAnimationFrame(timer);
   }, []);
+
+  useEffect(() => {
+    fetchStatus();
+  }, [fetchStatus]);
 
   return (
     <>
@@ -184,6 +194,11 @@ export default function Projects() {
           <p>
             <a href="/">cd ..</a>
           </p>
+          {currentRepo && (
+            <p style={{ fontSize: "12px", opacity: 0.6 }}>
+              currently hacking on: {currentRepo}
+            </p>
+          )}
         </div>
 
         {categories.map((category, catIndex) => (
@@ -194,7 +209,7 @@ export default function Projects() {
             <ul className="project-list">
               {category.projects.map((project) => (
                 <li key={project.name} className="project-item">
-                  <span className="project-name" onMouseEnter={onMouseEnter}>{project.name}</span>
+                  <span className="project-name">{project.name}</span>
                   <span className="project-desc">{project.description}</span>
                 </li>
               ))}
