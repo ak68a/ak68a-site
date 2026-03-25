@@ -51,7 +51,7 @@ export default function Home() {
           </p>
           <p>
             I like building things &mdash; agents, security tools, compilers,
-            voice interfaces, whatever catches my attention next.
+            voice interfaces, whatever&apos;s useful.
           </p>
         </div>
 
