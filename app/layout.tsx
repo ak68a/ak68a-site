@@ -18,9 +18,30 @@ const robotoMono = Roboto_Mono({
 
 export const metadata: Metadata = {
   title: "AK68A",
+  description: "Co-founder & CTO @ Trio — fintech-native partner helping teams build the future of finance.",
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
+  },
+  openGraph: {
+    title: "AK68A",
+    description: "Co-founder & CTO @ Trio — fintech-native partner helping teams build the future of finance.",
+    url: "https://ak68a.co",
+    siteName: "AK68A",
+    images: [
+      {
+        url: "/social.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AK68A",
+    description: "Co-founder & CTO @ Trio — fintech-native partner helping teams build the future of finance.",
+    images: ["/social.png"],
   },
 };
 
