@@ -124,7 +124,7 @@ export function useScrambleOnHover(options: ScrambleOptions = {}) {
     let iteration = 0;
     let spliceIteration = 0;
 
-    const existing = (el as Record<string, unknown>)._scrambleTimer as number | undefined;
+    const existing = (el as unknown as Record<string, unknown>)._scrambleTimer as number | undefined;
     if (existing) window.clearInterval(existing);
 
     const timer = window.setInterval(() => {
@@ -150,7 +150,7 @@ export function useScrambleOnHover(options: ScrambleOptions = {}) {
       }
     }, interval);
 
-    (el as Record<string, unknown>)._scrambleTimer = timer;
+    (el as unknown as Record<string, unknown>)._scrambleTimer = timer;
   };
 
   return { onMouseEnter };
