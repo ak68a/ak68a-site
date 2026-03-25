@@ -1,66 +1,86 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+
+import { useRef, useEffect, useState } from "react";
+import { useTheme } from "./ThemeProvider";
+import { useScramble } from "./useScramble";
 
 export default function Home() {
+  const { theme, toggleTheme } = useTheme();
+  const [visible, setVisible] = useState(false);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const footerRef = useRef<HTMLElement>(null);
+
+  useScramble(titleRef, { duration: 3000, interval: 30, charset: "all", uppercase: true });
+  useScramble(footerRef, { duration: 3000, interval: 30, charset: "all", uppercase: true });
+
+  useEffect(() => {
+    const timer = requestAnimationFrame(() => setVisible(true));
+    return () => cancelAnimationFrame(timer);
+  }, []);
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
+    <>
+      <div
+        style={{
+          opacity: visible ? 1 : 0,
+          transition: "opacity 1s ease",
+        }}
+      >
+        <header className="header">
+          <button
+            id="theme-toggle"
+            className="theme-toggle"
+            aria-label="Toggle dark mode"
+            onClick={toggleTheme}
+          >
+            <span className="theme-icon">
+              {theme === "dark" ? "\u2600\uFE0F" : "\uD83C\uDF19"}
+            </span>
+          </button>
+        </header>
+
+        <h3 ref={titleRef}>AK68A</h3>
+        <br />
+        <div className="container">
           <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
+            Co-founder &amp; CTO @{" "}
+            <a href="https://trio.dev" target="_blank" rel="noopener noreferrer">
+              Trio
             </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
+            &mdash; fintech-native partner helping teams build the future of finance.
+          </p>
+          <p>
+            I like building things &mdash; agents, security tools, compilers,
+            voice interfaces, whatever catches my attention next.
           </p>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+
+        <ul>
+          <li>
+            [0]{" "}
+            <a href="https://github.com/ak68a" target="_blank" rel="noopener noreferrer">
+              /github
+            </a>
+          </li>
+          <li>
+            [1]{" "}
+            <a href="/projects">
+              /projects
+            </a>
+          </li>
+          <li>
+            [2] <a href="mailto:hey@ak68a.co">hey@ak68a.co</a>
+          </li>
+        </ul>
+
+        <br />
+        <p>Cheers for dropping by.</p>
+
+        <footer ref={footerRef} className="footer">
+          AK68A RA= 12h 56.7m, Dec= +21° 41´
+        </footer>
+        <div className="copyright">&copy; 2030 ak68a</div>
+      </div>
+    </>
   );
 }
