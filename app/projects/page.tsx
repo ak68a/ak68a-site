@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { useTheme } from "../ThemeProvider";
-import { useScramble } from "../useScramble";
+import { useScramble, useScrambleOnHover } from "../useScramble";
 
 const categories = [
   {
@@ -67,6 +67,11 @@ const categories = [
         name: "Xeno",
         description:
           "AI agent payment sandbox. Dual-rail settlement with x402 and ACK-Pay, DID-based identity, MCP banking tools, and a security evaluation framework.",
+      },
+      {
+        name: "AgentId",
+        description:
+          "On-chain identity and delegation verification for autonomous AI agents.",
       },
       {
         name: "Kasho",
@@ -141,6 +146,12 @@ export default function Projects() {
     uppercase: true,
   });
 
+  const { onMouseEnter } = useScrambleOnHover({
+    duration: 600,
+    interval: 25,
+    charset: "alphanumeric",
+  });
+
   useEffect(() => {
     const timer = requestAnimationFrame(() => setVisible(true));
     return () => cancelAnimationFrame(timer);
@@ -183,7 +194,7 @@ export default function Projects() {
             <ul className="project-list">
               {category.projects.map((project) => (
                 <li key={project.name} className="project-item">
-                  <span className="project-name">{project.name}</span>
+                  <span className="project-name" onMouseEnter={onMouseEnter}>{project.name}</span>
                   <span className="project-desc">{project.description}</span>
                 </li>
               ))}

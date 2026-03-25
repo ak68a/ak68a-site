@@ -32,6 +32,59 @@ function randomChar(chars: string[], upper: boolean): string {
   return upper ? c.toUpperCase() : c;
 }
 
+export function useScrambleOnHover(options: ScrambleOptions = {}) {
+  const duration = options.duration ?? 800;
+  const interval = options.interval ?? 30;
+  const charsetName = options.charset ?? "all";
+  const uppercase = options.uppercase ?? false;
+  const chars = charsets[charsetName];
+
+  const onMouseEnter = (e: React.MouseEvent<HTMLElement>) => {
+    const el = e.currentTarget;
+    const originalText = el.getAttribute("data-text") || el.textContent || "";
+    if (!el.getAttribute("data-text")) {
+      el.setAttribute("data-text", originalText);
+    }
+
+    const len = originalText.length;
+    const arr = originalText.split("");
+    const totalSteps = Math.max(1, Math.floor(duration / interval / len));
+
+    let iteration = 0;
+    let spliceIteration = 0;
+
+    const existing = (el as Record<string, unknown>)._scrambleTimer as number | undefined;
+    if (existing) window.clearInterval(existing);
+
+    const timer = window.setInterval(() => {
+      iteration++;
+      const scrambled: string[] = [];
+      for (let i = 0; i < len; i++) {
+        scrambled.push(randomChar(chars, uppercase));
+      }
+
+      if (iteration % totalSteps === 0) {
+        spliceIteration++;
+      }
+
+      const realChars = arr.slice(0, spliceIteration);
+      for (let i = 0; i < realChars.length; i++) {
+        scrambled[i] = realChars[i];
+      }
+
+      el.textContent = scrambled.join("");
+
+      if (spliceIteration >= len) {
+        window.clearInterval(timer);
+      }
+    }, interval);
+
+    (el as Record<string, unknown>)._scrambleTimer = timer;
+  };
+
+  return { onMouseEnter };
+}
+
 export function useScramble(
   ref: React.RefObject<HTMLElement | null>,
   options: ScrambleOptions = {}
