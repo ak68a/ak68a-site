@@ -71,7 +71,13 @@ export default function Home() {
             </a>
           </li>
           <li>
-            [2] <a href="mailto:hey@ak68a.co">hey@ak68a.co</a>
+            [2]{" "}
+            <a href="/research">
+              /research
+            </a>
+          </li>
+          <li>
+            [3] <a href="mailto:hey@ak68a.co">hey@ak68a.co</a>
           </li>
         </ul>
 
