@@ -4,12 +4,12 @@ import { join } from "path";
 
 const papers: Record<string, { pin: string; file: string; filename: string }> = {
   "agent-reliability": {
-    pin: process.env.PAPER_PIN || "1992",
+    pin: process.env.PAPER_PIN?.trim() || "1992",
     file: "workflow-eval-paper.pdf",
     filename: "agent-reliability-financial-tool-use.pdf",
   },
   "supply-chain-defense": {
-    pin: process.env.PAPER_PIN || "1992",
+    pin: process.env.PAPER_PIN?.trim() || "1992",
     file: "supply-chain-defense.pdf",
     filename: "supply-chain-defense.pdf",
   },
