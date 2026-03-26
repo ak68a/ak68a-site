@@ -260,12 +260,7 @@ export default function Research() {
         {papers.map((paper) => (
           <div
             key={paper.id}
-            style={{
-              minWidth: "500px",
-              maxWidth: "500px",
-              flexShrink: 0,
-              scrollSnapAlign: "start",
-            }}
+            className="paper-card"
           >
             <h4 style={{ margin: "0 0 4px" }}>{paper.title}</h4>
             <p style={{ opacity: 0.6, fontSize: "0.85em" }}>{paper.date}</p>
