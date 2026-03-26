@@ -10,8 +10,8 @@ const papers = [
     title: "Evaluating Agent Reliability in Financial Tool Use",
     date: "March 2026",
     description: [
-      "AI agents using financial tools fail 75% of the time out of the box. Not because they pick the wrong tool, but because they construct malformed arguments and break data chaining between steps. I built an evaluation framework that identifies three failure categories and a layered orchestration architecture that brings the failure rate to zero.",
-      "The journey: 25% pass rate (raw LLM) \u2192 50% (validation + retry) \u2192 100% (output labeling + schema-rich prompting). Each layer solves a different failure category. No single layer is sufficient alone.",
+      "AI agents using financial tools fail 75% of the time out of the box. The failures span malformed arguments, broken data chaining, and non-deterministic tool selection errors\u2014and they're model-independent. I validated this across Claude Sonnet 4 and GPT-4o: both fail identically. I built a layered orchestration architecture that brings the failure rate to zero across both providers.",
+      "The journey: 25% pass rate (raw LLM) \u2192 50% (validation + retry) \u2192 100% (output labeling + schema-rich prompting + tool selection correction). Five layers, each solving a different failure category. No single layer is sufficient alone. Single-run evals miss non-deterministic failures entirely\u2014multi-run evaluation is required.",
       "Built on the Agent Commerce Kit (ACK) protocol with real cryptographic operations: W3C credentials, DID resolution, JWT signing, payment request/receipt issuance. No mocks.",
     ],
   },
