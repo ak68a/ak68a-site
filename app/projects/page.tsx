@@ -192,7 +192,7 @@ export default function Projects() {
         <br />
         <div className="container">
           <p>
-            <a href="/">cd ..</a>
+            <a href="/">&larr; back</a>
           </p>
           {currentRepo && (
             <p style={{ fontSize: "12px", opacity: 0.6 }}>
