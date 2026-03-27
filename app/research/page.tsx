@@ -10,9 +10,10 @@ const papers = [
     title: "Evaluating Agent Reliability in Financial Tool Use",
     date: "March 2026",
     description: [
-      "AI agents using financial tools fail 75% of the time out of the box. The failures span malformed arguments, broken data chaining, and non-deterministic tool selection errors\u2014and they're model-independent. I validated this across Claude Sonnet 4 and GPT-4o: both fail identically. I built a layered orchestration architecture that brings the failure rate to zero across both providers.",
-      "The journey: 25% pass rate (raw LLM) \u2192 50% (validation + retry) \u2192 100% (output labeling + schema-rich prompting + tool selection correction). Five layers, each solving a different failure category. No single layer is sufficient alone. Single-run evals miss non-deterministic failures entirely\u2014multi-run evaluation is required.",
-      "Built on the Agent Commerce Kit (ACK) protocol with real cryptographic operations: W3C credentials, DID resolution, JWT signing, payment request/receipt issuance. No mocks.",
+      "AI agents using financial tools fail 75% of the time out of the box. Failures span malformed arguments, broken data chaining, and non-deterministic tool selection, and they're model-independent. Validated across Claude Sonnet 4 and GPT-4o: both fail identically.",
+      "The fix is five layers stacked: Zod schemas enforce argument shapes, a retry loop catches transient failures, output labels let the model chain data across calls, schema-rich prompts ground tool selection, and a correction layer catches wrong-tool picks. Remove any one and the system regresses.",
+      "Single-run evals give false confidence. The eval harness runs each workflow multiple times and tracks pass rates per layer, so non-deterministic failures and regressions surface immediately.",
+      "Built on the Agent Commerce Kit (ACK) protocol with real cryptographic operations: W3C Verifiable Credentials, DID resolution, Ed25519 signing, and payment request/receipt issuance over JSON-RPC. No mocks, no stubs.",
     ],
   },
   // {

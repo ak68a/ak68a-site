@@ -10,9 +10,9 @@ export default function Home() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const footerRef = useRef<HTMLElement>(null);
 
-  useScramble(titleRef, { duration: 3000, interval: 30, charset: "all", uppercase: true });
+  useScramble(titleRef, { duration: 1500, interval: 25, charset: "all", uppercase: true });
   useScrambleLoop(titleRef, { duration: 400, interval: 20, charset: "all", uppercase: true, minDelay: 30000, maxDelay: 60000 });
-  useScramble(footerRef, { duration: 3000, interval: 30, charset: "all", uppercase: true });
+  useScramble(footerRef, { duration: 1500, interval: 25, charset: "all", uppercase: true });
 
   useEffect(() => {
     const timer = requestAnimationFrame(() => setVisible(true));
