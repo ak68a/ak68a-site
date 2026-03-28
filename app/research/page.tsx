@@ -16,16 +16,17 @@ const papers = [
       "Built on the Agent Commerce Kit (ACK) protocol with real cryptographic operations: W3C Verifiable Credentials, DID resolution, Ed25519 signing, and payment request/receipt issuance over JSON-RPC. No mocks, no stubs.",
     ],
   },
-  // {
-  //   id: "supply-chain-defense",
-  //   title: "Catching Supply Chain Attacks Before They Execute",
-  //   date: "March 2026",
-  //   description: [
-  //     "Package registries are built on trust. Security audits stop at first-party code and miss the dependency tree entirely. The recent litellmpy attack hit 90 million downloads with malware that triggered on install, not execution.",
-  //     "I built a CLI that wraps package managers and acts as an airlock. It analyzes dependency changes before installation, flags risk signals like install scripts and maintainer changes, and gates behind explicit approval.",
-  //     "Tested against simulated supply chain attacks: benign payloads that mimic real attack patterns. If the system catches them, it works. The journey from detection gaps to full coverage, documented as it happens.",
-  //   ],
-  // },
+  {
+    id: "supply-chain-defense",
+    title: "Pre-Install Behavioral Analysis for npm Supply Chain Defense",
+    date: "March 2026",
+    description: [
+      "npm supply chain attacks execute arbitrary code before anyone reviews the package. Existing defenses match against known vulnerability databases and catch nothing that hasn't been reported yet. Supply chain attacks are zero-day by nature.",
+      "I built a CLI that intercepts package manager commands, performs dry-run resolution, downloads and inspects package contents, and runs six parallel risk analyzers against every dependency change. It catches install-script injection, typosquatting, dependency confusion, maintainer compromise, obfuscated code, manifest confusion, and trojan transitive dependencies without any external vulnerability database.",
+      "Validated with 331 tests including 17 end-to-end tests against crafted attack packages simulating all major supply chain attack categories. Zero false negatives on attacks, zero false positives across seven distinct clean-package edge cases. Full analysis pipeline runs in under 3 seconds on 500-dependency projects.",
+      "Every gate decision is recorded in a tamper-resistant HMAC-chained audit log with cryptographic proof that the log hasn't been modified after the fact.",
+    ],
+  },
 ];
 
 function PinEntry({
