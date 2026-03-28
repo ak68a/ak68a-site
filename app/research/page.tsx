@@ -6,6 +6,17 @@ import { useScramble } from "../useScramble";
 
 const papers = [
   {
+    id: "supply-chain-defense",
+    title: "Pre-Install Behavioral Analysis for npm Supply Chain Defense",
+    date: "April 2026",
+    description: [
+      "npm supply chain attacks execute arbitrary code before anyone reviews the package. Existing defenses match against known vulnerability databases and catch nothing that hasn't been reported yet. Supply chain attacks are zero-day by nature.",
+      "I built a CLI that intercepts package manager commands, performs dry-run resolution, downloads and inspects package contents, and runs six parallel risk analyzers against every dependency change. It catches install-script injection, typosquatting, dependency confusion, maintainer compromise, obfuscated code, manifest confusion, and trojan transitive dependencies without any external vulnerability database.",
+      "Validated with 331 tests including 17 end-to-end tests against crafted attack packages simulating all major supply chain attack categories. Zero false negatives on attacks, zero false positives across seven distinct clean-package edge cases. Full analysis pipeline runs in under 3 seconds on 500-dependency projects.",
+      "Every gate decision is recorded in a tamper-resistant HMAC-chained audit log with cryptographic proof that the log hasn't been modified after the fact.",
+    ],
+  },
+  {
     id: "agent-reliability",
     title: "Evaluating Agent Reliability in Financial Tool Use",
     date: "March 2026",
@@ -14,17 +25,6 @@ const papers = [
       "The fix is five layers stacked: Zod schemas enforce argument shapes, a retry loop catches transient failures, output labels let the model chain data across calls, schema-rich prompts ground tool selection, and a correction layer catches wrong-tool picks. Remove any one and the system regresses.",
       "Single-run evals give false confidence. The eval harness runs each workflow multiple times and tracks pass rates per layer, so non-deterministic failures and regressions surface immediately.",
       "Built on the Agent Commerce Kit (ACK) protocol with real cryptographic operations: W3C Verifiable Credentials, DID resolution, Ed25519 signing, and payment request/receipt issuance over JSON-RPC. No mocks, no stubs.",
-    ],
-  },
-  {
-    id: "supply-chain-defense",
-    title: "Pre-Install Behavioral Analysis for npm Supply Chain Defense",
-    date: "March 2026",
-    description: [
-      "npm supply chain attacks execute arbitrary code before anyone reviews the package. Existing defenses match against known vulnerability databases and catch nothing that hasn't been reported yet. Supply chain attacks are zero-day by nature.",
-      "I built a CLI that intercepts package manager commands, performs dry-run resolution, downloads and inspects package contents, and runs six parallel risk analyzers against every dependency change. It catches install-script injection, typosquatting, dependency confusion, maintainer compromise, obfuscated code, manifest confusion, and trojan transitive dependencies without any external vulnerability database.",
-      "Validated with 331 tests including 17 end-to-end tests against crafted attack packages simulating all major supply chain attack categories. Zero false negatives on attacks, zero false positives across seven distinct clean-package edge cases. Full analysis pipeline runs in under 3 seconds on 500-dependency projects.",
-      "Every gate decision is recorded in a tamper-resistant HMAC-chained audit log with cryptographic proof that the log hasn't been modified after the fact.",
     ],
   },
 ];
