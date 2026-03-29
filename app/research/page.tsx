@@ -10,10 +10,10 @@ const papers = [
     title: "Pre-Install Behavioral Analysis for npm Supply Chain Defense",
     date: "April 2026",
     description: [
-      "npm supply chain attacks execute arbitrary code before anyone reviews the package. Existing defenses match against known vulnerability databases and catch nothing that hasn't been reported yet. Supply chain attacks are zero-day by nature.",
-      "I built a CLI that intercepts package manager commands, performs dry-run resolution, downloads and inspects package contents, and runs six parallel risk analyzers against every dependency change. It catches install-script injection, typosquatting, dependency confusion, maintainer compromise, obfuscated code, manifest confusion, and trojan transitive dependencies without any external vulnerability database.",
-      "Validated with 331 tests including 17 end-to-end tests against crafted attack packages simulating all major supply chain attack categories. Zero false negatives on attacks, zero false positives across seven distinct clean-package edge cases. Full analysis pipeline runs in under 3 seconds on 500-dependency projects.",
-      "Every gate decision is recorded in a tamper-resistant HMAC-chained audit log with cryptographic proof that the log hasn't been modified after the fact.",
+      "npm packages execute arbitrary code at install time, before anyone reviews a single line. Every existing defense checks a vulnerability database and catches nothing that hasn't already been reported. Supply chain attacks are zero-day by nature.",
+      "The fix is a pre-install gate: intercept the package manager, dry-run resolve, download, and run six parallel analyzers against every dependency change before it touches disk. No vulnerability database required. It catches install-script injection, typosquatting, dependency confusion, maintainer compromise, obfuscated payloads, and manifest confusion in one pass.",
+      "331 tests, 17 end-to-end against crafted attack packages covering every major supply chain attack category. Zero false negatives. Zero false positives across seven clean-package edge cases. Full pipeline runs in under 3 seconds on 500-dependency projects.",
+      "Every gate decision is HMAC-chained into a tamper-resistant audit log with cryptographic proof the record hasn't been modified after the fact. No trust required.",
     ],
   },
   {
