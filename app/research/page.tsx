@@ -7,12 +7,12 @@ import { useScramble } from "../useScramble";
 const papers = [
   {
     id: "supply-chain-defense",
-    title: "Pre-Install Behavioral Analysis for npm Supply Chain Defense",
+    title: "Pre-Install Analysis for Supply Chain Defense",
     date: "April 2026",
     description: [
       "npm packages execute arbitrary code at install time, before anyone reviews a single line. Every existing defense checks a vulnerability database and catches nothing that hasn't already been reported. Supply chain attacks are zero-day by nature.",
       "The fix is a pre-install gate: intercept the package manager, dry-run resolve, download, and run six parallel analyzers against every dependency change before it touches disk. No vulnerability database required. It catches install-script injection, typosquatting, dependency confusion, maintainer compromise, obfuscated payloads, and manifest confusion in one pass.",
-      "331 tests, 17 end-to-end against crafted attack packages covering every major supply chain attack category. Zero false negatives. Zero false positives across seven clean-package edge cases. Full pipeline runs in under 3 seconds on 500-dependency projects.",
+      "331 tests. 17 end-to-end against crafted attack packages, one for every major supply chain vector. Zero false negatives. Zero false positives across seven clean-package edge cases. Full pipeline runs in under 3 seconds on 500-dependency projects.",
       "Every gate decision is HMAC-chained into a tamper-resistant audit log with cryptographic proof the record hasn't been modified after the fact. No trust required.",
     ],
   },
@@ -208,6 +208,8 @@ function PinEntry({
 export default function Research() {
   const { theme, toggleTheme } = useTheme();
   const [visible, setVisible] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
 
   useScramble(titleRef, {
@@ -220,6 +222,21 @@ export default function Research() {
   useEffect(() => {
     const timer = requestAnimationFrame(() => setVisible(true));
     return () => cancelAnimationFrame(timer);
+  }, []);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    function onScroll() {
+      if (!el) return;
+      const maxScroll = el.scrollWidth - el.clientWidth;
+      if (maxScroll <= 0) return;
+      const progress = el.scrollLeft / maxScroll;
+      const index = Math.round(progress * (papers.length - 1));
+      setActiveIndex(Math.min(index, papers.length - 1));
+    }
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
@@ -250,6 +267,7 @@ export default function Research() {
       </p>
 
       <div
+        ref={scrollRef}
         style={{
           display: "flex",
           gap: "140px",
@@ -275,6 +293,22 @@ export default function Research() {
               <a href="mailto:hey@ak68a.co">hey@ak68a.co</a>.
             </p>
           </div>
+        ))}
+      </div>
+
+      <div className="paper-indicators">
+        {papers.map((_, i) => (
+          <div
+            key={i}
+            style={{
+              width: "8px",
+              height: "8px",
+              borderRadius: "2px",
+              background: "var(--text-color)",
+              opacity: i === activeIndex ? 1 : 0.2,
+              transition: "opacity 0.2s ease",
+            }}
+          />
         ))}
       </div>
 

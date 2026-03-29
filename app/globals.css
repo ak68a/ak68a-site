@@ -151,10 +151,20 @@ footer {
   scroll-snap-align: start;
 }
 
+.paper-indicators {
+  display: none;
+}
+
 @media (max-width: 600px) {
   .paper-card {
     min-width: 100%;
     max-width: 100%;
+  }
+  .paper-indicators {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    padding: 12px 0 24px;
   }
 }
 
