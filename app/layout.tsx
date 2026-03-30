@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { JetBrains_Mono, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./ThemeProvider";
@@ -53,15 +52,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${jetbrainsMono.className} ${robotoMono.variable}`} suppressHydrationWarning>
-      <head>
-        <Script
-          id="theme-init"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme');if(t){document.documentElement.setAttribute('data-theme',t)}else if(window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches){document.documentElement.setAttribute('data-theme','dark')}}catch(e){}})()`,
-          }}
-        />
-      </head>
       <ThemeProvider>
         <body>{children}</body>
       </ThemeProvider>

@@ -8,15 +8,15 @@ export default function Home() {
   const { theme, toggleTheme } = useTheme();
   const [visible, setVisible] = useState(false);
   const titleRef = useRef<HTMLHeadingElement>(null);
-  const footerRef = useRef<HTMLElement>(null);
+  const [footerVisible, setFooterVisible] = useState(false);
 
-  useScramble(titleRef, { duration: 1500, interval: 25, charset: "all", uppercase: true });
+  useScramble(titleRef, { duration: 800, interval: 15, charset: "all", uppercase: true });
   useScrambleLoop(titleRef, { duration: 400, interval: 20, charset: "all", uppercase: true, minDelay: 30000, maxDelay: 60000 });
-  useScramble(footerRef, { duration: 1500, interval: 25, charset: "all", uppercase: true });
 
   useEffect(() => {
     const timer = requestAnimationFrame(() => setVisible(true));
-    return () => cancelAnimationFrame(timer);
+    const footerTimer = setTimeout(() => setFooterVisible(true), 300);
+    return () => { cancelAnimationFrame(timer); clearTimeout(footerTimer); };
   }, []);
 
 
@@ -45,15 +45,16 @@ export default function Home() {
         <br />
         <div className="container">
           <p>
-            Co-founder &amp; CTO @{" "}
+            Software engineer building at the intersection of AI,
+            security, and payments.
+          </p>
+          <p>
+            Currently at{" "}
             <a href="https://trio.dev" target="_blank" rel="noopener noreferrer">
               Trio
             </a>{" "}
-            &mdash; fintech-native partner helping teams build the future of finance.
-          </p>
-          <p>
-            I like building things. Agents, security tools, compilers,
-            voice interfaces, whatever&apos;s useful.
+            &mdash; shipping fintech infrastructure for the next generation of
+            finance.
           </p>
         </div>
 
@@ -84,8 +85,8 @@ export default function Home() {
         <br />
         <p>Cheers for dropping by.</p>
 
-        <footer ref={footerRef} className="footer">
-          AK68A RA= 12h 56.7m, Dec= +21° 41´
+        <footer className="footer" style={{ opacity: footerVisible ? 1 : 0, transition: "opacity 0.6s ease" }}>
+          AK68A RA= 12h 56.7m, Dec= +21&deg; 41&prime;
         </footer>
         <div className="copyright">&copy; 2030 ak68a</div>
       </div>

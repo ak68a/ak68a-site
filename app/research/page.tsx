@@ -9,6 +9,7 @@ const papers = [
     id: "supply-chain-defense",
     title: "Pre-Install Analysis for Supply Chain Defense",
     date: "April 2026",
+    tags: ["security", "npm"],
     description: [
       "npm packages execute arbitrary code at install time, before anyone reviews a single line. Every existing defense checks a vulnerability database and catches nothing that hasn't already been reported. Supply chain attacks are zero-day by nature.",
       "The fix is a pre-install gate: intercept the package manager, dry-run resolve, download, and run six parallel analyzers against every dependency change before it touches disk. No vulnerability database required. It catches install-script injection, typosquatting, dependency confusion, maintainer compromise, obfuscated payloads, and manifest confusion in one pass.",
@@ -20,6 +21,7 @@ const papers = [
     id: "agent-reliability",
     title: "Evaluating Agent Reliability in Financial Tool Use",
     date: "March 2026",
+    tags: ["fintech", "AI agents"],
     description: [
       "AI agents using financial tools fail 75% of the time out of the box. Failures span malformed arguments, broken data chaining, and non-deterministic tool selection, and they're model-independent. Validated across Claude Sonnet 4 and GPT-4o: both fail identically.",
       "The fix is five layers stacked: Zod schemas enforce argument shapes, a retry loop catches transient failures, output labels let the model chain data across calls, schema-rich prompts ground tool selection, and a correction layer catches wrong-tool picks. Remove any one and the system regresses.",
@@ -213,8 +215,8 @@ export default function Research() {
   const titleRef = useRef<HTMLHeadingElement>(null);
 
   useScramble(titleRef, {
-    duration: 3000,
-    interval: 30,
+    duration: 800,
+    interval: 15,
     charset: "all",
     uppercase: true,
   });
@@ -283,7 +285,9 @@ export default function Research() {
             className="paper-card"
           >
             <h4 style={{ margin: "0 0 4px" }}>{paper.title}</h4>
-            <p style={{ opacity: 0.6, fontSize: "0.85em" }}>{paper.date}</p>
+            <p style={{ opacity: 0.6, fontSize: "0.85em", display: "flex", alignItems: "center", gap: "6px", flexWrap: "wrap" }}>
+              {paper.date} &mdash; {paper.tags.join(", ")}
+            </p>
             {paper.description.map((para, i) => (
               <p key={i}>{para}</p>
             ))}

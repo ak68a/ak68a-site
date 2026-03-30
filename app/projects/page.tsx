@@ -81,12 +81,12 @@ const categories = [
     ],
   },
   {
-    name: "Network & Infrastructure",
+    name: "Mesh Networking",
     projects: [
       {
-        name: "Sovereign Stack",
+        name: "Soverign",
         description:
-          "Full technology stack from the ground up. LoRa mesh networking, custom OS builds on postmarketOS, compiler engineering with LLVM, and a GPU-accelerated declarative UI framework. RF to application layer.",
+          "LoRa mesh networking on custom hardware. Multi-hop routing, off-grid communication, and RF protocol design on postmarketOS.",
       },
     ],
   },
@@ -145,14 +145,14 @@ export default function Projects() {
   }, []);
 
   useScramble(titleRef, {
-    duration: 3000,
-    interval: 30,
+    duration: 800,
+    interval: 15,
     charset: "all",
     uppercase: true,
   });
   useScramble(footerRef, {
-    duration: 3000,
-    interval: 30,
+    duration: 800,
+    interval: 15,
     charset: "all",
     uppercase: true,
   });
