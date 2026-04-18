@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { useTheme } from "./ThemeProvider";
-import { useScramble, useScrambleLoop } from "./useScramble";
+import { useScramble, useScrambleLoop, useScrambleOnHover } from "./useScramble";
 
 export default function Home() {
   const { theme, toggleTheme } = useTheme();
@@ -12,6 +12,7 @@ export default function Home() {
 
   useScramble(titleRef, { duration: 800, interval: 15, charset: "all", uppercase: true });
   useScrambleLoop(titleRef, { duration: 400, interval: 20, charset: "all", uppercase: true, minDelay: 30000, maxDelay: 60000 });
+  const scrambleProps = useScrambleOnHover({ duration: 600, interval: 20, charset: "all", uppercase: true });
 
   useEffect(() => {
     const timer = requestAnimationFrame(() => setVisible(true));
@@ -46,7 +47,7 @@ export default function Home() {
         <div className="container">
           <p>
             Software engineer building at the intersection of AI,
-            security, and payments.
+            security, and fintech.
           </p>
           <p>
             Currently at{" "}
@@ -88,6 +89,14 @@ export default function Home() {
         <footer className="footer" style={{ opacity: footerVisible ? 1 : 0, transition: "opacity 0.6s ease" }}>
           AK68A RA= 12h 56.7m, Dec= +21&deg; 41&prime;
         </footer>
+        <a
+          href={theme === "dark" ? "https://drkmtr.sh" : "https://positiveparticles.co"}
+          className="secret-link"
+          data-text={theme === "dark" ? "DARKMATTER" : "POSITIVEPARTICLES"}
+          {...scrambleProps}
+        >
+          {theme === "dark" ? "DARKMATTER" : "POSITIVEPARTICLES"}
+        </a>
         <div className="copyright">&copy; 2030 ak68a</div>
       </div>
     </>

@@ -140,6 +140,28 @@ footer {
   }
 }
 
+.secret-link {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  font-size: 0.7rem;
+  color: transparent;
+  text-decoration: none;
+  box-shadow: none;
+  z-index: 1000;
+  transition: color 0.3s ease;
+  cursor: default;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 2s forwards;
+}
+
+.secret-link:hover {
+  color: var(--footer-color);
+  cursor: pointer;
+  background: none;
+  box-shadow: none;
+}
+
 /* Projects page */
 
 /* Research page */
