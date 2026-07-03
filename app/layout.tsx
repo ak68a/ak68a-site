@@ -18,14 +18,14 @@ const robotoMono = Roboto_Mono({
 
 export const metadata: Metadata = {
   title: "AK68A",
-  description: "Software engineer building at the intersection of AI, security, and fintech.",
+  description: "Software engineer building at the intersection of AI, fintech, and security.",
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
   },
   openGraph: {
     title: "AK68A",
-    description: "Software engineer building at the intersection of AI, security, and fintech.",
+    description: "Software engineer building at the intersection of AI, fintech, and security.",
     url: "https://ak68a.co",
     siteName: "AK68A",
     images: [
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "AK68A",
-    description: "Software engineer building at the intersection of AI, security, and fintech.",
+    description: "Software engineer building at the intersection of AI, fintech, and security.",
     images: ["/social.png"],
   },
 };
