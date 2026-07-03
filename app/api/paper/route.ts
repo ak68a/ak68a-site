@@ -13,6 +13,11 @@ const papers: Record<string, { pin: string; file: string; filename: string }> = 
     file: "supply-chain-defense.pdf",
     filename: "supply-chain-defense.pdf",
   },
+  "agent-orchestration": {
+    pin: process.env.PAPER_PIN?.trim() || "1992",
+    file: "agent-orchestration.pdf",
+    filename: "multi-repo-agent-orchestration.pdf",
+  },
 };
 
 const attempts = new Map<string, { count: number; resetAt: number }>();
