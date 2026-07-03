@@ -162,58 +162,83 @@ footer {
   box-shadow: none;
 }
 
-/* Projects page */
+/* Single-page layout */
 
-/* Research page */
+.site-layout {
+  display: flex;
+  min-height: 100vh;
+  gap: 0;
+}
 
-.paper-card {
-  min-width: 500px;
-  max-width: 500px;
+.left-pane {
   flex-shrink: 0;
-  scroll-snap-align: start;
+  max-width: 500px;
+  position: relative;
 }
 
-.paper-indicators {
-  display: none;
+.right-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  max-width: 640px;
+  background: var(--bg-color);
+  border-left: 1px solid var(--toggle-border);
+  overflow-y: auto;
+  padding: 60px 40px;
+  transform: translateX(100%);
+  transition: transform 0.35s ease;
+  z-index: 100;
 }
 
-@media (max-width: 600px) {
-  .paper-card {
-    min-width: 100%;
-    max-width: 100%;
-  }
-  .paper-indicators {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    padding: 12px 0 24px;
-  }
+.right-panel-open {
+  transform: translateX(0);
 }
 
-/* Projects page */
-
-.project-category {
-  margin: 48px 0 0;
-  max-width: 560px;
+.panel-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 24px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+  font-family: inherit;
+  padding: 0;
+  line-height: 1;
 }
 
-.category-title {
+.panel-close:hover {
+  opacity: 1;
+}
+
+.panel-title {
   font-size: 14px;
   font-weight: 500;
   letter-spacing: 2px;
   text-transform: uppercase;
-  margin: 0 0 16px;
+  margin: 0 0 32px;
 }
 
-.project-list {
-  margin: 0 0 0;
+.panel-content {
+  max-width: 500px;
+}
+
+.panel-project-list {
+  list-style: none;
+  margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 }
 
 .project-item {
-  margin: 0 0 24px;
-  padding-left: 16px;
-  border-left: 1px solid var(--toggle-border);
+  padding-left: 0;
 }
 
 .project-name {
@@ -227,4 +252,34 @@ footer {
   font-size: 13px;
   line-height: 22px;
   color: var(--desc-color);
+}
+
+.panel-paper {
+  margin: 0 0 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--toggle-border);
+}
+
+.panel-paper:last-child {
+  border-bottom: none;
+}
+
+.nav-active {
+  background: var(--link-shadow);
+  box-shadow: none;
+}
+
+@media (max-width: 900px) {
+  .site-layout {
+    flex-direction: column;
+  }
+
+  .left-pane {
+    max-width: 100%;
+  }
+
+  .right-panel {
+    width: 100%;
+    max-width: 100%;
+  }
 }
