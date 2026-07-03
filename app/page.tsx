@@ -312,15 +312,14 @@ export default function Home() {
           <div className="container">
             <p>
               Software engineer building at the intersection of AI,
-              security, and fintech.
+              fintech, and security.
             </p>
             <p>
-              Currently at{" "}
+              CTO at{" "}
               <a href="https://trio.dev" target="_blank" rel="noopener noreferrer">
                 Trio
-              </a>{" "}
-              &mdash; shipping fintech infrastructure for the next generation of
-              finance.
+              </a>
+              . Co-founder at Clossir.
             </p>
           </div>
 
