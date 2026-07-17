@@ -350,6 +350,12 @@ export default function Home() {
                 /research
               </a>
             </li>
+            <li>
+              [3]{" "}
+              <a href="https://fintechengineer.io" target="_blank" rel="noopener noreferrer">
+                /fe
+              </a>
+            </li>
           </ul>
 
           <br />
