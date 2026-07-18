@@ -276,6 +276,7 @@ export default function Home() {
         case "0": window.open("https://github.com/ak68a", "_blank"); break;
         case "1": setActivePanel(prev => prev === "projects" ? null : "projects"); break;
         case "2": setActivePanel(prev => prev === "research" ? null : "research"); break;
+        case "3": window.open("https://fintechengineer.io", "_blank"); break;
         case "Escape":
         case "Backspace":
         case "Delete": setActivePanel(null); break;
