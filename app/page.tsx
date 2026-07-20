@@ -316,7 +316,7 @@ export default function Home() {
               fintech, and security.
             </p>
             <p>
-              Co-Founder & CTO at{" "}
+              Co-Founder/CTO at{" "}
               <a href="https://trio.dev" target="_blank" rel="noopener noreferrer">
                 Trio
               </a>
