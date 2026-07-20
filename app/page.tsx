@@ -316,11 +316,11 @@ export default function Home() {
               fintech, and security.
             </p>
             <p>
-              CTO at{" "}
+              Co-Founder & CTO at{" "}
               <a href="https://trio.dev" target="_blank" rel="noopener noreferrer">
                 Trio
               </a>
-              . Co-founder at Clossir.
+              {" "}& Clossir.
             </p>
           </div>
 
