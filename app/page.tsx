@@ -4,35 +4,107 @@ import { useRef, useEffect, useState } from "react";
 import { useTheme } from "./ThemeProvider";
 import { useScramble, useScrambleLoop, useScrambleOnHover } from "./useScramble";
 
-const projects = [
+const domains = [
+  "Payments",
+  "Banking",
+  "Lending & Credit",
+  "Blockchain & Crypto",
+  "AI Systems",
+  "Security & Compliance",
+];
+
+const services = [
+  {
+    name: "Systems Architecture",
+    description: "Design and build financial infrastructure from scratch or restructure what's there.",
+  },
+  {
+    name: "Security & Compliance",
+    description: "Threat modeling, audit readiness, and hardened infrastructure for regulated environments.",
+  },
+  {
+    name: "AI Engineering",
+    description: "AI-driven systems and AI-augmented dev workflows that accelerate your team.",
+  },
+  {
+    name: "Technical Leadership",
+    description: "Fractional CTO, team buildout, and engineering strategy.",
+  },
+  {
+    name: "Due Diligence",
+    description: "Technical assessment for investors, acquirers, or partners.",
+  },
+];
+
+const clients = {
+  enterprises: [
+    { name: "PayPal", url: "https://www.paypal.com" },
+    { name: "Fiserv", url: "https://www.fiserv.com" },
+    { name: "Apex Fintech Solutions", url: "https://www.apexfintechsolutions.com" },
+    { name: "Happen", url: "https://happen.com" },
+    { name: "Tilt", url: "https://tilt.com" },
+  ],
+  startups: [
+    { name: "Clossir", url: "https://clossir.com" },
+    { name: "Magellan Payments", url: "https://magellanpayments.com/" },
+    { name: "Path Crypto", url: "https://www.pathcrypto.com/", note: "Acq. Gemini" },
+    { name: "Catena", url: "https://catena.com/" },
+    { name: "Radius", url: "https://www.radiustech.xyz/" },
+    { name: "GivEZ", url: "https://giveez.com/" },
+  ],
+};
+
+const ownWork = [
+  {
+    name: "Zero",
+    description:
+      "Security intelligence platform for cross-chain fintech. Threat modeling, multi-framework audits, and vendor security scoring.",
+  },
   {
     name: "Clossir",
+    url: "https://clossir.com",
     description:
-      "Complete infrastructure for tokenized finance. Identity, compliance, assets, and vaults — one platform, every chain. Verify once, hold everywhere. Compliance enforced inside the token, not bolted on. NAV-based yield vaults, automated distributions, and a three-tier fee cascade — all cross-chain via LayerZero.",
+      "Complete infrastructure for tokenized finance. Identity, compliance, assets, and vaults, one platform, every chain.",
   },
   {
     name: "Agent Commerce Kit (ACK)",
+    url: "https://www.agentcommercekit.com",
     description:
-      "Open-source toolkit for agent-to-agent commerce. DIDs, verifiable credentials, JWT signing, CAIP-based addressing, and payment primitives. TypeScript monorepo, Swift package for iOS/macOS, and Go libraries for identity and payments.",
+      "Open-source toolkit for agent-to-agent commerce. DIDs, verifiable credentials, JWT signing, and payment primitives.",
   },
   {
     name: "Nighthawk",
     description:
-      "Supply chain defense CLI. Wraps package managers and analyzes dependency changes before installation — typosquatting detection, maintainer change tracking, risk signal analysis.",
+      "Supply chain defense CLI. Wraps package managers and analyzes dependency changes before installation.",
   },
 ];
 
 const papers = [
+  {
+    id: "shadow-system",
+    title: "Autonomous Shadow Systems for Continuous Adversarial Testing of Financial Infrastructure",
+    date: "September 2026",
+    tags: ["security", "fintech", "AI agents"],
+    description: [
+      "A production-mirror shadow system operated entirely by AI agents.",
+    ],
+  },
+  {
+    id: "fintech-security-posture",
+    title: "Building a Nation-State-Resistant Security Posture for Cross-Chain Fintech",
+    date: "August 2026",
+    tags: ["security", "fintech", "compliance"],
+    description: [
+      "Security intelligence platform for cross-chain fintech. Threat modeling up to nation-state APTs, multi-framework audits verified against live code.",
+    ],
+  },
   {
     id: "agent-orchestration",
     title: "Multi-Repo Agent Orchestration with Layered Code Intelligence",
     date: "July 2026",
     tags: ["AI agents", "fintech", "MCP"],
     description: [
-      "AI coding agents are blind beyond the repo they're sitting in. Across a 13-repo fintech platform with cross-chain contracts, event processing, and shared packages, an agent working in one service has zero awareness of upstream consumers, downstream breakage, or the architectural contracts that bind them. Every cross-repo change is a coin flip.",
-      "The fix is a three-layer intelligence hub behind a single MCP gateway. A code graph built from AST-parsed property graphs provides deterministic blast-radius analysis — BFS over call/import edges, depth-bucketed risk scoring, and API surface diffing. Semantic memory pairs Voyage Code 3 embeddings with BM25 full-text search, merged via Reciprocal Rank Fusion. A live architecture registry loaded from TypeScript-defined contracts exposes every route, service, process flow, and Kafka topic as queryable tools. Each layer covers the others' blind spots: the graph answers what breaks, memory answers why it was built that way, the registry answers what the system promised.",
-      "On top sits a gated autonomous workflow: plan-implement-verify-review with strict author-approver separation, tier-based safety escalation for on-chain and compliance-sensitive code, and grounding attestations that trace every AI-generated artifact back to the live MCP state it was grounded in. The system explicitly distinguishes server-enforced gates from LLM-discipline-only gates — no pretending the model can't forge a gate record.",
-      "The retrieval plane adds reranking, an eval harness for retrieval quality, and tool-usage observability to close the feedback loop. A first-class governance corpus — security standards, internal policies, and company values — is ingested into the RAG layer so compliance context is available at planning time, not just review time. A time-boxed Speakeasy Gateway pilot provides unified API observability across all MCP tool calls.",
+      "Three-layer MCP intelligence hub giving AI agents cross-repo awareness across a 13-repo fintech platform.",
     ],
   },
   {
@@ -41,10 +113,7 @@ const papers = [
     date: "April 2026",
     tags: ["security", "npm"],
     description: [
-      "npm packages execute arbitrary code at install time, before anyone reviews a single line. Every existing defense checks a vulnerability database and catches nothing that hasn't already been reported. Supply chain attacks are zero-day by nature.",
-      "The fix is a pre-install gate: intercept the package manager, dry-run resolve, download, and run six parallel analyzers against every dependency change before it touches disk. No vulnerability database required. It catches install-script injection, typosquatting, dependency confusion, maintainer compromise, obfuscated payloads, and manifest confusion in one pass.",
-      "331 tests. 17 end-to-end against crafted attack packages, one for every major supply chain vector. Zero false negatives. Zero false positives across seven clean-package edge cases. Full pipeline runs in under 3 seconds on 500-dependency projects.",
-      "Every gate decision is HMAC-chained into a tamper-resistant audit log with cryptographic proof the record hasn't been modified after the fact. No trust required.",
+      "Pre-install gate that intercepts package managers and runs six parallel analyzers against every dependency change before it touches disk.",
     ],
   },
   {
@@ -53,10 +122,7 @@ const papers = [
     date: "March 2026",
     tags: ["fintech", "AI agents"],
     description: [
-      "AI agents using financial tools fail 75% of the time out of the box. Failures span malformed arguments, broken data chaining, and non-deterministic tool selection, and they're model-independent. Validated across Claude Sonnet 4 and GPT-4o: both fail identically.",
-      "The fix is five layers stacked: Zod schemas enforce argument shapes, a retry loop catches transient failures, output labels let the model chain data across calls, schema-rich prompts ground tool selection, and a correction layer catches wrong-tool picks. Remove any one and the system regresses.",
-      "Single-run evals give false confidence. The eval harness runs each workflow multiple times and tracks pass rates per layer, so non-deterministic failures and regressions surface immediately.",
-      "Built on the Agent Commerce Kit (ACK) protocol with real cryptographic operations: W3C Verifiable Credentials, DID resolution, Ed25519 signing, and payment request/receipt issuance over JSON-RPC. No mocks, no stubs.",
+      "AI agents using financial tools fail 75% of the time out of the box. A five-layer reliability stack brings that to near-zero.",
     ],
   },
 ];
@@ -240,9 +306,10 @@ function PinEntry({
 export default function Home() {
   const { theme, toggleTheme } = useTheme();
   const [visible, setVisible] = useState(false);
-  const [activePanel, setActivePanel] = useState<"projects" | "research" | null>(null);
-  const [displayPanel, setDisplayPanel] = useState<"projects" | "research" | null>(null);
+  const [activePanel, setActivePanel] = useState<"consult" | "research" | null>(null);
+  const [displayPanel, setDisplayPanel] = useState<"consult" | "research" | null>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
   const [footerVisible, setFooterVisible] = useState(false);
 
   useScramble(titleRef, { duration: 800, interval: 15, charset: "all", uppercase: true });
@@ -255,7 +322,7 @@ export default function Home() {
     return () => { cancelAnimationFrame(timer); clearTimeout(footerTimer); };
   }, []);
 
-  function togglePanel(panel: "projects" | "research") {
+  function togglePanel(panel: "consult" | "research") {
     setActivePanel(prev => prev === panel ? null : panel);
   }
 
@@ -273,10 +340,10 @@ export default function Home() {
       const active = document.activeElement;
       if (active instanceof HTMLInputElement || active instanceof HTMLTextAreaElement) return;
       switch (e.key) {
-        case "0": window.open("https://github.com/ak68a", "_blank"); break;
-        case "1": setActivePanel(prev => prev === "projects" ? null : "projects"); break;
-        case "2": setActivePanel(prev => prev === "research" ? null : "research"); break;
-        case "3": window.open("https://fintechengineer.io/", "_blank"); break;
+        case "0": setActivePanel(prev => prev === "consult" ? null : "consult"); break;
+        case "1": setActivePanel(prev => prev === "research" ? null : "research"); break;
+        case "2": window.open("https://handbook.fintechengineer.io", "_blank"); break;
+        case "3": window.open("https://ledgerdrift.com", "_blank"); break;
         case "Escape":
         case "Backspace":
         case "Delete": setActivePanel(null); break;
@@ -284,6 +351,25 @@ export default function Home() {
     }
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
+  useEffect(() => {
+    const el = panelRef.current;
+    if (!el) return;
+    let startX = 0;
+    function onTouchStart(e: TouchEvent) {
+      startX = e.touches[0].clientX;
+    }
+    function onTouchEnd(e: TouchEvent) {
+      const dx = e.changedTouches[0].clientX - startX;
+      if (dx > 80) setActivePanel(null);
+    }
+    el.addEventListener("touchstart", onTouchStart, { passive: true });
+    el.addEventListener("touchend", onTouchEnd, { passive: true });
+    return () => {
+      el.removeEventListener("touchstart", onTouchStart);
+      el.removeEventListener("touchend", onTouchEnd);
+    };
   }, []);
 
   return (
@@ -295,6 +381,17 @@ export default function Home() {
         }}
       >
         <header className="header">
+          <a
+            href="https://github.com/ak68a"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="github-link"
+            aria-label="GitHub"
+          >
+            <svg width="20" height="20" viewBox="0 0 98 96" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M41.4395 69.3848C28.8066 67.8535 19.9062 58.7617 19.9062 46.9902C19.9062 42.2051 21.6289 37.0371 24.5 33.5918C23.2559 30.4336 23.4473 23.7344 24.8828 20.959C28.7109 20.4805 33.8789 22.4902 36.9414 25.2656C40.5781 24.1172 44.4062 23.543 49.0957 23.543C53.7852 23.543 57.6133 24.1172 61.0586 25.1699C64.0254 22.4902 69.2891 20.4805 73.1172 20.959C74.457 23.543 74.6484 30.2422 73.4043 33.4961C76.4668 37.1328 78.0937 42.0137 78.0937 46.9902C78.0937 58.7617 69.1934 67.6621 56.3691 69.2891C59.623 71.3945 61.8242 75.9883 61.8242 81.252L61.8242 91.2051C61.8242 94.0762 64.2168 95.7031 67.0879 94.5547C84.4102 87.9512 98 70.6289 98 49.1914C98 22.1074 75.9883 0 48.9043 0C21.8203 0 0 22.1074 0 49.1914C0 70.4375 13.4941 88.0469 31.6777 94.6504C34.2617 95.6074 36.75 93.8848 36.75 91.3008L36.75 83.6445C35.4102 84.2188 33.6875 84.6016 32.1562 84.6016C25.8398 84.6016 22.1074 81.1563 19.4277 74.7441C18.375 72.1602 17.2266 70.6289 15.0254 70.3418C13.877 70.2461 13.4941 69.7676 13.4941 69.1934C13.4941 68.0449 15.4082 67.1836 17.3223 67.1836C20.0977 67.1836 22.4902 68.9063 24.9785 72.4473C26.8926 75.2227 28.9023 76.4668 31.2949 76.4668C33.6875 76.4668 35.2187 75.6055 37.4199 73.4043C39.0469 71.7773 40.291 70.3418 41.4395 69.3848Z"/>
+            </svg>
+          </a>
           <button
             id="theme-toggle"
             className="theme-toggle"
@@ -312,41 +409,29 @@ export default function Home() {
           <br />
           <div className="container">
             <p>
-              Software engineer building at the intersection of AI,
-              fintech, and security.
+              CTO & financial systems architect across payments,
+              banking, lending, and crypto.
             </p>
             <p>
-              Co-Founder/CTO at{" "}
-              <a href="https://trio.dev" target="_blank" rel="noopener noreferrer">
-                Trio
-              </a>
-              {" "}&{" "}
-              <a href="https://clossir.com" target="_blank" rel="noopener noreferrer">
-                Clossir
-              </a>
-              .
+              I build and consult on secure, compliant financial
+              infrastructure, AI-driven systems, and AI-augmented
+              engineering for fintech teams at scale.
             </p>
           </div>
 
           <ul>
             <li>
               [0]{" "}
-              <a href="https://github.com/ak68a" target="_blank" rel="noopener noreferrer">
-                /github
+              <a
+                href="#"
+                onClick={(e) => { e.preventDefault(); togglePanel("consult"); }}
+                className={activePanel === "consult" ? "nav-active" : ""}
+              >
+                /consult
               </a>
             </li>
             <li>
               [1]{" "}
-              <a
-                href="#"
-                onClick={(e) => { e.preventDefault(); togglePanel("projects"); }}
-                className={activePanel === "projects" ? "nav-active" : ""}
-              >
-                /projects
-              </a>
-            </li>
-            <li>
-              [2]{" "}
               <a
                 href="#"
                 onClick={(e) => { e.preventDefault(); togglePanel("research"); }}
@@ -356,9 +441,15 @@ export default function Home() {
               </a>
             </li>
             <li>
+              [2]{" "}
+              <a href="https://handbook.fintechengineer.io" target="_blank" rel="noopener noreferrer">
+                /handbook
+              </a>
+            </li>
+            <li>
               [3]{" "}
-              <a href="https://fintechengineer.io/" target="_blank" rel="noopener noreferrer">
-                /fe
+              <a href="https://ledgerdrift.com" target="_blank" rel="noopener noreferrer">
+                /ledgerdrift
               </a>
             </li>
           </ul>
@@ -380,26 +471,85 @@ export default function Home() {
           <div className="copyright">&copy; 2030 ak68a</div>
         </div>
 
-        <div className={`right-panel ${activePanel ? "right-panel-open" : ""}`}>
-          <button
-            className="panel-close"
-            onClick={() => setActivePanel(null)}
-            aria-label="Close panel"
-          >
-            &times;
-          </button>
-
-          {displayPanel === "projects" && (
+        <div ref={panelRef} className={`right-panel ${activePanel ? "right-panel-open" : ""}`}>
+          {displayPanel === "consult" && (
             <div className="panel-content">
-              <h4 className="panel-title">/projects</h4>
-              <ul className="panel-project-list">
-                {projects.map((project, i) => (
-                  <li key={project.name} className="project-item">
-                    <span className="project-name">{project.name}</span>
-                    <span className="project-desc">{project.description}</span>
-                  </li>
+              <h4 className="panel-title">/consult</h4>
+              <p className="consult-tagline">
+                I help fintech teams ship secure, compliant products faster.
+              </p>
+              <p className="consult-domains-line">
+                {domains.join(" / ")}
+              </p>
+              <div className="consult-services">
+                {services.map((s) => (
+                  <div key={s.name} className="service-item">
+                    <span className="service-name">{s.name}</span>
+                    <span className="service-desc">{s.description}</span>
+                  </div>
                 ))}
-              </ul>
+              </div>
+              <p className="consult-contact-top">
+                <a href="mailto:hey@ak68a.co">hey@ak68a.co</a>
+              </p>
+
+              <div className="consult-clients">
+                <h5 className="consult-section-title">Clients & Partners</h5>
+                <div className="clients-grid">
+                  <div className="clients-column">
+                    <span className="clients-label">Enterprises</span>
+                    {clients.enterprises.map((c) => (
+                      <span key={c.name} className="client-name">
+                        {c.url ? (
+                          <a href={c.url} target="_blank" rel="noopener noreferrer">{c.name}</a>
+                        ) : c.name}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="clients-column">
+                    <span className="clients-label">Startups</span>
+                    {clients.startups.map((c) => (
+                      <span key={c.name} className="client-name">
+                        {c.url ? (
+                          <a href={c.url} target="_blank" rel="noopener noreferrer">{c.name}</a>
+                        ) : c.name}
+                        {c.note && <span className="client-note"> ({c.note})</span>}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="consult-trio">
+                <h5 className="consult-section-title">Trio</h5>
+                <p className="trio-desc">
+                  Staffing, recruiting, and software development for fintech teams.{" "}
+                  <a href="https://trio.dev" target="_blank" rel="noopener noreferrer">trio.dev</a>
+                </p>
+              </div>
+
+              <div className="consult-contact">
+                <h5 className="consult-section-title">Get in Touch</h5>
+                <p className="contact-desc">
+                  <a href="mailto:hey@ak68a.co">hey@ak68a.co</a>
+                </p>
+              </div>
+
+              <div className="consult-own-work">
+                <h5 className="consult-section-title">Open Source & Personal</h5>
+                <ul className="panel-project-list">
+                  {ownWork.map((project) => (
+                    <li key={project.name} className="project-item">
+                      <span className="project-name">
+                        {project.url ? (
+                          <a href={project.url} target="_blank" rel="noopener noreferrer">{project.name}</a>
+                        ) : project.name}
+                      </span>
+                      <span className="project-desc">{project.description}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           )}
 
@@ -416,10 +566,6 @@ export default function Home() {
                     <p key={i}>{para}</p>
                   ))}
                   <PinEntry paperId={paper.id} onError={() => {}} />
-                  <p style={{ opacity: 0.6, fontSize: "0.85em" }}>
-                    Don&apos;t have a PIN? Reach out at{" "}
-                    <a href="mailto:hey@ak68a.co">hey@ak68a.co</a>.
-                  </p>
                 </div>
               ))}
             </div>
