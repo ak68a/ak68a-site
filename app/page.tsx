@@ -15,6 +15,10 @@ const domains = [
 
 const services = [
   {
+    name: "Fractional CTO",
+    description: "Part-time technical leadership for startups that need a CTO but not a full-time one. Architecture decisions, team buildout, engineering culture, vendor evaluation, and board-level technical strategy.",
+  },
+  {
     name: "Systems Architecture",
     description: "Design and build financial infrastructure from scratch or restructure what's there.",
   },
@@ -25,10 +29,6 @@ const services = [
   {
     name: "AI Engineering",
     description: "AI-driven systems and AI-augmented dev workflows that accelerate your team.",
-  },
-  {
-    name: "Technical Leadership",
-    description: "Fractional CTO, team buildout, and engineering strategy.",
   },
   {
     name: "Due Diligence",
