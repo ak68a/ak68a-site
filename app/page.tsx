@@ -50,7 +50,7 @@ const clients = {
     { name: "Path Crypto", url: "https://www.pathcrypto.com/", note: "Acq. Gemini" },
     { name: "Catena", url: "https://catena.com/" },
     { name: "Radius", url: "https://www.radiustech.xyz/" },
-    { name: "GivEZ", url: "https://giveez.com/" },
+    { name: "GivEZ", url: "https://givezglobal.com/" },
   ],
 };
 
