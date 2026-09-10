@@ -5,15 +5,19 @@ import { useTheme } from "./ThemeProvider";
 import { useScramble, useScrambleLoop, useScrambleOnHover } from "./useScramble";
 
 const domains = [
+  "AI & Machine Learning",
   "Payments",
   "Banking",
   "Lending & Credit",
   "Blockchain & Crypto",
-  "AI Systems",
   "Security & Compliance",
 ];
 
 const services = [
+  {
+    name: "AI/ML Engineering",
+    description: "Production ML systems for fintech — fraud detection, compliance automation, risk scoring, and LLM-powered intelligence pipelines.",
+  },
   {
     name: "Fractional CTO",
     description: "Part-time technical leadership for startups that need a CTO but not a full-time one. Architecture decisions, team buildout, engineering culture, vendor evaluation, and board-level technical strategy.",
@@ -25,10 +29,6 @@ const services = [
   {
     name: "Security & Compliance",
     description: "Threat modeling, audit readiness, and hardened infrastructure for regulated environments.",
-  },
-  {
-    name: "AI Engineering",
-    description: "AI-driven systems and AI-augmented dev workflows that accelerate your team.",
   },
   {
     name: "Due Diligence",
@@ -409,13 +409,13 @@ export default function Home() {
           <br />
           <div className="container">
             <p>
-              CTO & financial systems architect across payments,
-              banking, lending, and crypto.
+              AI/ML engineer & CTO building intelligent systems
+              for financial infrastructure.
             </p>
             <p>
-              I build and consult on secure, compliant financial
-              infrastructure, AI-driven systems, and AI-augmented
-              engineering for fintech teams at scale.
+              I build AI-driven systems for fintech — fraud
+              detection, compliance automation, and intelligent
+              infrastructure for teams at scale.
             </p>
           </div>
 
@@ -476,7 +476,7 @@ export default function Home() {
             <div className="panel-content">
               <h4 className="panel-title">/consult</h4>
               <p className="consult-tagline">
-                I help fintech teams ship secure, compliant products faster.
+                I build AI/ML systems and lead engineering for fintech teams.
               </p>
               <p className="consult-domains-line">
                 {domains.join(" / ")}
