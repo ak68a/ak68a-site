@@ -442,14 +442,14 @@ export default function Home() {
             </li>
             <li>
               [2]{" "}
-              <a href="https://handbook.fintechengineer.io" target="_blank" rel="noopener noreferrer">
-                /handbook
+              <a href="https://ledgerdrift.com" target="_blank" rel="noopener noreferrer">
+                /thoughts
               </a>
             </li>
             <li>
               [3]{" "}
-              <a href="https://ledgerdrift.com" target="_blank" rel="noopener noreferrer">
-                /ledgerdrift
+              <a href="https://handbook.fintechengineer.io" target="_blank" rel="noopener noreferrer">
+                /handbook
               </a>
             </li>
           </ul>
