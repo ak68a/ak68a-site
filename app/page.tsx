@@ -56,9 +56,16 @@ const clients = {
 
 const ownWork = [
   {
-    name: "Zero",
+    name: "x402",
+    url: "https://www.x402.org",
     description:
-      "Security intelligence platform for cross-chain fintech. Threat modeling, multi-framework audits, and vendor security scoring.",
+      "Open protocol for HTTP-native payments. Enables machines and agents to pay for resources using the 402 status code.",
+  },
+  {
+    name: "Agent Commerce Kit (ACK)",
+    url: "https://www.agentcommercekit.com",
+    description:
+      "Open-source toolkit for agent-to-agent commerce. DIDs, verifiable credentials, JWT signing, and payment primitives.",
   },
   {
     name: "Clossir",
@@ -67,10 +74,9 @@ const ownWork = [
       "Complete infrastructure for tokenized finance. Identity, compliance, assets, and vaults, one platform, every chain.",
   },
   {
-    name: "Agent Commerce Kit (ACK)",
-    url: "https://www.agentcommercekit.com",
+    name: "Zero",
     description:
-      "Open-source toolkit for agent-to-agent commerce. DIDs, verifiable credentials, JWT signing, and payment primitives.",
+      "Security intelligence platform for cross-chain fintech. Threat modeling, multi-framework audits, and vendor security scoring.",
   },
   {
     name: "Nighthawk",
@@ -489,9 +495,22 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-              <p className="consult-contact-top">
-                <a href="mailto:hey@ak68a.co">hey@ak68a.co</a>
-              </p>
+
+              <div className="consult-own-work">
+                <h5 className="consult-section-title">Open Source & Personal</h5>
+                <ul className="panel-project-list">
+                  {ownWork.map((project) => (
+                    <li key={project.name} className="project-item">
+                      <span className="project-name">
+                        {project.url ? (
+                          <a href={project.url} target="_blank" rel="noopener noreferrer">{project.name}</a>
+                        ) : project.name}
+                      </span>
+                      <span className="project-desc">{project.description}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
               <div className="consult-clients">
                 <h5 className="consult-section-title">Clients & Partners</h5>
@@ -533,22 +552,6 @@ export default function Home() {
                 <p className="contact-desc">
                   <a href="mailto:hey@ak68a.co">hey@ak68a.co</a>
                 </p>
-              </div>
-
-              <div className="consult-own-work">
-                <h5 className="consult-section-title">Open Source & Personal</h5>
-                <ul className="panel-project-list">
-                  {ownWork.map((project) => (
-                    <li key={project.name} className="project-item">
-                      <span className="project-name">
-                        {project.url ? (
-                          <a href={project.url} target="_blank" rel="noopener noreferrer">{project.name}</a>
-                        ) : project.name}
-                      </span>
-                      <span className="project-desc">{project.description}</span>
-                    </li>
-                  ))}
-                </ul>
               </div>
             </div>
           )}
