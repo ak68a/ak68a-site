@@ -317,6 +317,10 @@ export default function Home() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const [footerVisible, setFooterVisible] = useState(false);
+  const [showCrosshair, setShowCrosshair] = useState(false);
+  const mousePosRef = useRef({ x: 0, y: 0 });
+  const lerpPosRef = useRef({ x: 0, y: 0 });
+  const [lerpPos, setLerpPos] = useState({ x: 0, y: 0 });
 
   useScramble(titleRef, { duration: 800, interval: 15, charset: "all", uppercase: true });
   useScrambleLoop(titleRef, { duration: 400, interval: 20, charset: "all", uppercase: true, minDelay: 30000, maxDelay: 60000 });
@@ -326,6 +330,34 @@ export default function Home() {
     const timer = requestAnimationFrame(() => setVisible(true));
     const footerTimer = setTimeout(() => setFooterVisible(true), 300);
     return () => { cancelAnimationFrame(timer); clearTimeout(footerTimer); };
+  }, []);
+
+  useEffect(() => {
+    const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+    if (isTouchDevice) return;
+    let rafId: number;
+    const LERP = 0.15;
+    function tick() {
+      const lp = lerpPosRef.current;
+      const mp = mousePosRef.current;
+      lp.x += (mp.x - lp.x) * LERP;
+      lp.y += (mp.y - lp.y) * LERP;
+      setLerpPos({ x: Math.round(lp.x * 10) / 10, y: Math.round(lp.y * 10) / 10 });
+      rafId = requestAnimationFrame(tick);
+    }
+    function onMove(e: MouseEvent) {
+      mousePosRef.current = { x: e.clientX, y: e.clientY };
+      setShowCrosshair(true);
+    }
+    function onLeave() { setShowCrosshair(false); }
+    document.addEventListener("mousemove", onMove);
+    document.addEventListener("mouseleave", onLeave);
+    rafId = requestAnimationFrame(tick);
+    return () => {
+      document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseleave", onLeave);
+      cancelAnimationFrame(rafId);
+    };
   }, []);
 
   function togglePanel(panel: "consult" | "research") {
@@ -380,7 +412,12 @@ export default function Home() {
 
   return (
     <>
-      <div className={`site-layout ${activePanel ? "panel-open" : ""}`}
+      <div className="crosshair-h" style={{ top: lerpPos.y, opacity: showCrosshair ? 0.1 : 0 }} />
+      <div className="crosshair-v" style={{ left: lerpPos.x, opacity: showCrosshair ? 0.1 : 0 }} />
+      <div className="crosshair-coords" style={{ top: lerpPos.y + 12, left: lerpPos.x + 12, opacity: showCrosshair ? 0.75 : 0 }}>
+        {Math.round(mousePosRef.current.x)}, {Math.round(mousePosRef.current.y)}
+      </div>
+      <div className={`site-layout ${activePanel ? "panel-open" : ""} ${showCrosshair ? "crosshair-visible" : ""}`}
         style={{
           opacity: visible ? 1 : 0,
           transition: "opacity 1s ease",

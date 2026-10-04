@@ -420,6 +420,47 @@ footer {
   box-shadow: none;
 }
 
+/* Crosshair cursor */
+.crosshair-h,
+.crosshair-v {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: opacity 0.3s ease;
+}
+
+.crosshair-h {
+  left: 0;
+  right: 0;
+  height: 0;
+  border-top: 1px dotted var(--text-color);
+}
+
+.crosshair-v {
+  top: 0;
+  bottom: 0;
+  width: 0;
+  border-left: 1px dotted var(--text-color);
+}
+
+.crosshair-coords {
+  position: fixed;
+  pointer-events: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: var(--text-color);
+  z-index: 10000;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+.crosshair-visible {
+  cursor: default;
+}
+
 @media (max-width: 900px) {
   .site-layout {
     flex-direction: column;
