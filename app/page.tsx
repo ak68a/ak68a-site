@@ -68,13 +68,20 @@ const ownWork = [
       "Open-source toolkit for agent-to-agent commerce. DIDs, verifiable credentials, JWT signing, and payment primitives.",
   },
   {
+    name: "Machine Payment Protocol (MPP)",
+    url: "https://github.com/tempoxyz/mpp-specs",
+    description:
+      "Payment protocol for AI agents over MCP. Adds payment credentials and receipts to tool calls so agents can pay for services inside the message flow.",
+  },
+  {
     name: "Clossir",
     url: "https://clossir.com",
     description:
       "Complete infrastructure for tokenized finance. Identity, compliance, assets, and vaults, one platform, every chain.",
   },
   {
-    name: "Zero",
+    name: "DarkMatr",
+    url: "https://drkmtr.sh",
     description:
       "Security intelligence platform for cross-chain fintech. Threat modeling, multi-framework audits, and vendor security scoring.",
   },
@@ -87,227 +94,55 @@ const ownWork = [
 
 const papers = [
   {
+    id: "disciplined-orchestration",
+    title: "Disciplined Agent Orchestration for Multi-Repo Engineering Teams",
+    date: "October 2026",
+    tags: ["AI agents", "orchestration", "developer tooling"],
+    description:
+      "Moving agent harness discipline from prose into code. Deterministic gate orchestration, append-only ledgers, tiered human-in-the-loop classification, and a memory architecture that separates working state from curated knowledge.",
+  },
+  {
     id: "shadow-system",
     title: "Autonomous Shadow Systems for Continuous Adversarial Testing of Financial Infrastructure",
     date: "September 2026",
     tags: ["security", "fintech", "AI agents"],
-    description: [
+    description:
       "A production-mirror shadow system operated entirely by AI agents.",
-    ],
   },
   {
     id: "fintech-security-posture",
     title: "Building a Nation-State-Resistant Security Posture for Cross-Chain Fintech",
     date: "August 2026",
     tags: ["security", "fintech", "compliance"],
-    description: [
+    description:
       "Security intelligence platform for cross-chain fintech. Threat modeling up to nation-state APTs, multi-framework audits verified against live code.",
-    ],
   },
   {
     id: "agent-orchestration",
     title: "Multi-Repo Agent Orchestration with Layered Code Intelligence",
     date: "July 2026",
     tags: ["AI agents", "fintech", "MCP"],
-    description: [
+    description:
       "Three-layer MCP intelligence hub giving AI agents cross-repo awareness across a 13-repo fintech platform.",
-    ],
   },
   {
     id: "supply-chain-defense",
     title: "Pre-Install Analysis for Supply Chain Defense",
     date: "April 2026",
     tags: ["security", "npm"],
-    description: [
+    description:
       "Pre-install gate that intercepts package managers and runs six parallel analyzers against every dependency change before it touches disk.",
-    ],
   },
   {
     id: "agent-reliability",
     title: "Evaluating Agent Reliability in Financial Tool Use",
     date: "March 2026",
     tags: ["fintech", "AI agents"],
-    description: [
+    description:
       "AI agents using financial tools fail 75% of the time out of the box. A five-layer reliability stack brings that to near-zero.",
-    ],
   },
 ];
 
-function PinEntry({
-  paperId,
-  onError,
-}: {
-  paperId: string;
-  onError: (msg: string) => void;
-}) {
-  const [pin, setPin] = useState(["", "", "", ""]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const inputRefs = [
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-  ];
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const urlPin = params.get("pin");
-    const urlPaper = params.get("paper");
-    if (
-      urlPin &&
-      urlPin.length === 4 &&
-      /^\d{4}$/.test(urlPin) &&
-      (!urlPaper || urlPaper === paperId)
-    ) {
-      const digits = urlPin.split("");
-      setPin(digits);
-      submitPin(digits.join(""));
-    }
-  }, []);
-
-  async function submitPin(code: string) {
-    setError("");
-    setLoading(true);
-
-    try {
-      const res = await fetch("/api/paper", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ pin: code, paper: paperId }),
-      });
-
-      if (res.ok) {
-        const blob = await res.blob();
-        const url = URL.createObjectURL(blob);
-        window.open(url, "_blank");
-        setLoading(false);
-      } else {
-        const data = await res.json();
-        const msg = data.error || "Invalid PIN.";
-        setError(msg);
-        onError(msg);
-        setPin(["", "", "", ""]);
-        inputRefs[0].current?.focus();
-        setLoading(false);
-      }
-    } catch {
-      setError("Something went wrong.");
-      setLoading(false);
-    }
-  }
-
-  function handleInput(index: number, value: string) {
-    if (!/^\d*$/.test(value)) return;
-
-    const digit = value.slice(-1);
-    const next = [...pin];
-    next[index] = digit;
-    setPin(next);
-    setError("");
-
-    if (digit && index < 3) {
-      inputRefs[index + 1].current?.focus();
-    }
-
-    if (digit && index === 3) {
-      const code = next.join("");
-      if (code.length === 4) {
-        inputRefs[index].current?.blur();
-        submitPin(code);
-      }
-    }
-  }
-
-  function handleKeyDown(index: number, e: React.KeyboardEvent) {
-    if (e.key === "Backspace" && !pin[index] && index > 0) {
-      inputRefs[index - 1].current?.focus();
-    }
-  }
-
-  function handlePaste(e: React.ClipboardEvent) {
-    e.preventDefault();
-    const pasted = e.clipboardData
-      .getData("text")
-      .replace(/\D/g, "")
-      .slice(0, 4);
-    if (pasted.length === 4) {
-      const digits = pasted.split("");
-      setPin(digits);
-      submitPin(pasted);
-    }
-  }
-
-  return (
-    <div style={{ margin: "24px 0" }}>
-      <p style={{ opacity: 0.8, fontSize: "0.85em", marginBottom: "12px" }}>
-        Enter PIN to access the full paper:
-      </p>
-      <div
-        style={{
-          display: "flex",
-          gap: "8px",
-          alignItems: "center",
-        }}
-      >
-        {pin.map((digit, i) => (
-          <input
-            key={i}
-            ref={inputRefs[i]}
-            type="text"
-            inputMode="numeric"
-            maxLength={1}
-            value={digit}
-            onChange={(e) => handleInput(i, e.target.value)}
-            onKeyDown={(e) => handleKeyDown(i, e)}
-            onPaste={i === 0 ? handlePaste : undefined}
-            disabled={loading}
-            style={{
-              width: "28px",
-              height: "32px",
-              textAlign: "center",
-              fontSize: "13px",
-              fontFamily: "inherit",
-              fontWeight: 500,
-              letterSpacing: "1px",
-              background: "var(--toggle-bg)",
-              border: `1px solid ${error ? "#e55" : "var(--toggle-border)"}`,
-              borderRadius: "5px",
-              color: "var(--text-color)",
-              outline: "none",
-              transition: "border-color 0.2s ease",
-              caretColor: "transparent",
-            }}
-            onFocus={(e) => {
-              e.target.style.borderColor = error
-                ? "#e55"
-                : "var(--text-color)";
-            }}
-            onBlur={(e) => {
-              e.target.style.borderColor = error
-                ? "#e55"
-                : "var(--toggle-border)";
-            }}
-          />
-        ))}
-        {loading && (
-          <span style={{ opacity: 0.5, fontSize: "0.85em" }}>loading...</span>
-        )}
-      </div>
-      {error && (
-        <p
-          style={{
-            color: "#e55",
-            fontSize: "0.8em",
-            marginTop: "8px",
-          }}
-        >
-          {error}
-        </p>
-      )}
-    </div>
-  );
-}
 
 export default function Home() {
   const { theme, toggleTheme } = useTheme();
@@ -506,10 +341,10 @@ export default function Home() {
           <a
             href={theme === "dark" ? "https://drkmtr.sh" : "https://positiveparticles.co"}
             className="secret-link"
-            data-text={theme === "dark" ? "DARKMATTER" : "POSITIVEPARTICLES"}
+            data-text={theme === "dark" ? "DARKMATR" : "+PARTICLES"}
             {...scrambleProps}
           >
-            {theme === "dark" ? "DARKMATTER" : "POSITIVEPARTICLES"}
+            {theme === "dark" ? "DARKMATR" : "+PARTICLES"}
           </a>
           <div className="copyright">&copy; 2030 ak68a</div>
         </div>
@@ -602,10 +437,18 @@ export default function Home() {
                   <p style={{ opacity: 0.6, fontSize: "0.85em" }}>
                     {paper.date} &mdash; {paper.tags.join(", ")}
                   </p>
-                  {paper.description.map((para, i) => (
-                    <p key={i}>{para}</p>
-                  ))}
-                  <PinEntry paperId={paper.id} onError={() => {}} />
+                  <p>{paper.description}</p>
+                  <a
+                    href={`mailto:hey@ak68a.co?subject=Research: ${encodeURIComponent(paper.title)}`}
+                    style={{
+                      display: "inline-block",
+                      fontSize: "0.85em",
+                      opacity: 0.7,
+                      marginTop: "4px",
+                    }}
+                  >
+                    Request access &rarr;
+                  </a>
                 </div>
               ))}
             </div>
