@@ -215,8 +215,8 @@ export default function Home() {
       switch (e.key) {
         case "0": setActivePanel(prev => prev === "consult" ? null : "consult"); break;
         case "1": setActivePanel(prev => prev === "research" ? null : "research"); break;
-        case "2": window.open("https://handbook.fintechengineer.io", "_blank"); break;
-        case "3": window.open("https://ledgerdrift.com", "_blank"); break;
+        case "2": window.open("https://ledgerdrift.com", "_blank"); break;
+        case "3": window.open("https://handbook.fintechengineer.io", "_blank"); break;
         case "Escape":
         case "Backspace":
         case "Delete": setActivePanel(null); break;
