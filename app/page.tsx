@@ -99,7 +99,7 @@ const papers = [
     date: "October 2026",
     tags: ["AI agents", "orchestration", "developer tooling"],
     description:
-      "Moving agent harness discipline from prose into code. Deterministic gate orchestration, append-only ledgers, tiered human-in-the-loop classification, and a memory architecture that separates working state from curated knowledge.",
+      "Deterministic gate orchestration, append-only ledgers, and tiered HITL classification for multi-repo agent harnesses.",
   },
   {
     id: "shadow-system",
