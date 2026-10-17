@@ -384,15 +384,6 @@ footer {
   margin-bottom: 24px;
 }
 
-.panel-paper {
-  margin: 0 0 48px;
-  padding-bottom: 48px;
-  border-bottom: 1px solid var(--toggle-border);
-}
-
-.panel-paper:last-child {
-  border-bottom: none;
-}
 
 .nav-active {
   background: var(--link-shadow);

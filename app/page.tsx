@@ -76,39 +76,12 @@ const ownWork = [
   },
 ];
 
-const papers = [
-  {
-    id: "disciplined-orchestration",
-    title: "Disciplined Agent Orchestration for Multi-Repo Engineering Teams",
-    date: "October 2026",
-    tags: ["AI agents", "orchestration", "developer tooling"],
-    description:
-      "Deterministic gate orchestration, append-only ledgers, and tiered HITL classification for multi-repo agent harnesses.",
-  },
-  {
-    id: "agent-orchestration",
-    title: "Multi-Repo Agent Orchestration with Layered Code Intelligence",
-    date: "July 2026",
-    tags: ["AI agents", "fintech", "MCP"],
-    description:
-      "Three-layer MCP intelligence hub giving AI agents cross-repo awareness across a 13-repo fintech platform.",
-  },
-  {
-    id: "agent-reliability",
-    title: "Evaluating Agent Reliability in Financial Tool Use",
-    date: "March 2026",
-    tags: ["fintech", "AI agents"],
-    description:
-      "AI agents using financial tools fail 75% of the time out of the box. A five-layer reliability stack brings that to near-zero.",
-  },
-];
-
 
 export default function Home() {
   const { theme, toggleTheme } = useTheme();
   const [visible, setVisible] = useState(false);
-  const [activePanel, setActivePanel] = useState<"consult" | "research" | null>(null);
-  const [displayPanel, setDisplayPanel] = useState<"consult" | "research" | null>(null);
+  const [activePanel, setActivePanel] = useState<"consult" | null>(null);
+  const [displayPanel, setDisplayPanel] = useState<"consult" | null>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const [footerVisible, setFooterVisible] = useState(false);
@@ -154,7 +127,7 @@ export default function Home() {
     };
   }, []);
 
-  function togglePanel(panel: "consult" | "research") {
+  function togglePanel(panel: "consult") {
     setActivePanel(prev => prev === panel ? null : panel);
   }
 
@@ -173,10 +146,9 @@ export default function Home() {
       if (active instanceof HTMLInputElement || active instanceof HTMLTextAreaElement) return;
       switch (e.key) {
         case "0": setActivePanel(prev => prev === "consult" ? null : "consult"); break;
-        case "1": setActivePanel(prev => prev === "research" ? null : "research"); break;
-        case "2": window.open("https://ledgerdrift.com", "_blank"); break;
-        case "3": window.open("https://handbook.fintechengineer.io", "_blank"); break;
-        case "4": window.open("https://grimoire.fintechengineer.io", "_blank"); break;
+        case "1": window.open("https://ledgerdrift.com", "_blank"); break;
+        case "2": window.open("https://handbook.fintechengineer.io", "_blank"); break;
+        case "3": window.open("https://grimoire.fintechengineer.io", "_blank"); break;
         case "Escape":
         case "Backspace":
         case "Delete": setActivePanel(null); break;
@@ -270,28 +242,18 @@ export default function Home() {
             </li>
             <li>
               [1]{" "}
-              <a
-                href="#"
-                onClick={(e) => { e.preventDefault(); togglePanel("research"); }}
-                className={activePanel === "research" ? "nav-active" : ""}
-              >
-                /research
-              </a>
-            </li>
-            <li>
-              [2]{" "}
               <a href="https://ledgerdrift.com" target="_blank" rel="noopener noreferrer">
                 /thoughts
               </a>
             </li>
             <li>
-              [3]{" "}
+              [2]{" "}
               <a href="https://handbook.fintechengineer.io" target="_blank" rel="noopener noreferrer">
                 /handbook
               </a>
             </li>
             <li>
-              [4]{" "}
+              [3]{" "}
               <a href="https://grimoire.fintechengineer.io" target="_blank" rel="noopener noreferrer">
                 /grimoire
               </a>
@@ -386,31 +348,6 @@ export default function Home() {
             </div>
           )}
 
-          {displayPanel === "research" && (
-            <div className="panel-content">
-              <h4 className="panel-title">/research</h4>
-              {papers.map((paper) => (
-                <div key={paper.id} className="panel-paper">
-                  <h4 style={{ margin: "0 0 4px" }}>{paper.title}</h4>
-                  <p style={{ opacity: 0.6, fontSize: "0.85em" }}>
-                    {paper.date} &mdash; {paper.tags.join(", ")}
-                  </p>
-                  <p>{paper.description}</p>
-                  <a
-                    href={`mailto:hey@ak68a.co?subject=Research: ${encodeURIComponent(paper.title)}`}
-                    style={{
-                      display: "inline-block",
-                      fontSize: "0.85em",
-                      opacity: 0.7,
-                      marginTop: "4px",
-                    }}
-                  >
-                    Request access &rarr;
-                  </a>
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       </div>
     </>
