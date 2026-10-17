@@ -10,7 +10,6 @@ const domains = [
   "Banking",
   "Lending & Credit",
   "Blockchain & Crypto",
-  "Security & Compliance",
 ];
 
 const services = [
@@ -25,10 +24,6 @@ const services = [
   {
     name: "Systems Architecture",
     description: "Design and build financial infrastructure from scratch or restructure what's there.",
-  },
-  {
-    name: "Security & Compliance",
-    description: "Threat modeling, audit readiness, and hardened infrastructure for regulated environments.",
   },
   {
     name: "Due Diligence",
@@ -91,36 +86,12 @@ const papers = [
       "Deterministic gate orchestration, append-only ledgers, and tiered HITL classification for multi-repo agent harnesses.",
   },
   {
-    id: "shadow-system",
-    title: "Autonomous Shadow Systems for Continuous Adversarial Testing of Financial Infrastructure",
-    date: "September 2026",
-    tags: ["security", "fintech", "AI agents"],
-    description:
-      "A production-mirror shadow system operated entirely by AI agents.",
-  },
-  {
-    id: "fintech-security-posture",
-    title: "Building a Nation-State-Resistant Security Posture for Cross-Chain Fintech",
-    date: "August 2026",
-    tags: ["security", "fintech", "compliance"],
-    description:
-      "Security intelligence platform for cross-chain fintech. Threat modeling up to nation-state APTs, multi-framework audits verified against live code.",
-  },
-  {
     id: "agent-orchestration",
     title: "Multi-Repo Agent Orchestration with Layered Code Intelligence",
     date: "July 2026",
     tags: ["AI agents", "fintech", "MCP"],
     description:
       "Three-layer MCP intelligence hub giving AI agents cross-repo awareness across a 13-repo fintech platform.",
-  },
-  {
-    id: "supply-chain-defense",
-    title: "Pre-Install Analysis for Supply Chain Defense",
-    date: "April 2026",
-    tags: ["security", "npm"],
-    description:
-      "Pre-install gate that intercepts package managers and runs six parallel analyzers against every dependency change before it touches disk.",
   },
   {
     id: "agent-reliability",
