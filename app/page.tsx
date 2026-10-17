@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { useTheme } from "./ThemeProvider";
-import { useScramble, useScrambleLoop, useScrambleOnHover } from "./useScramble";
+import { useScramble, useScrambleLoop } from "./useScramble";
 
 const domains = [
   "AI & Machine Learning",
@@ -79,17 +79,6 @@ const ownWork = [
     description:
       "Complete infrastructure for tokenized finance. Identity, compliance, assets, and vaults, one platform, every chain.",
   },
-  {
-    name: "DarkMatr",
-    url: "https://drkmtr.sh",
-    description:
-      "Security intelligence platform for cross-chain fintech. Threat modeling, multi-framework audits, and vendor security scoring.",
-  },
-  {
-    name: "Nighthawk",
-    description:
-      "Supply chain defense CLI. Wraps package managers and analyzes dependency changes before installation.",
-  },
 ];
 
 const papers = [
@@ -159,7 +148,6 @@ export default function Home() {
 
   useScramble(titleRef, { duration: 800, interval: 15, charset: "all", uppercase: true });
   useScrambleLoop(titleRef, { duration: 400, interval: 20, charset: "all", uppercase: true, minDelay: 30000, maxDelay: 60000 });
-  const scrambleProps = useScrambleOnHover({ duration: 600, interval: 20, charset: "all", uppercase: true });
 
   useEffect(() => {
     const timer = requestAnimationFrame(() => setVisible(true));
@@ -217,6 +205,7 @@ export default function Home() {
         case "1": setActivePanel(prev => prev === "research" ? null : "research"); break;
         case "2": window.open("https://ledgerdrift.com", "_blank"); break;
         case "3": window.open("https://handbook.fintechengineer.io", "_blank"); break;
+        case "4": window.open("https://grimoire.fintechengineer.io", "_blank"); break;
         case "Escape":
         case "Backspace":
         case "Delete": setActivePanel(null); break;
@@ -330,6 +319,12 @@ export default function Home() {
                 /handbook
               </a>
             </li>
+            <li>
+              [4]{" "}
+              <a href="https://grimoire.fintechengineer.io" target="_blank" rel="noopener noreferrer">
+                /grimoire
+              </a>
+            </li>
           </ul>
 
           <br />
@@ -338,14 +333,6 @@ export default function Home() {
           <footer className="footer" style={{ opacity: footerVisible ? 1 : 0, transition: "opacity 0.6s ease" }}>
             AK68A RA= 12h 56.7m, Dec= +21&deg; 41&prime;
           </footer>
-          <a
-            href={theme === "dark" ? "https://drkmtr.sh" : "https://positiveparticles.co"}
-            className="secret-link"
-            data-text={theme === "dark" ? "DARKMATR" : "+PARTICLES"}
-            {...scrambleProps}
-          >
-            {theme === "dark" ? "DARKMATR" : "+PARTICLES"}
-          </a>
           <div className="copyright">&copy; 2030 ak68a</div>
         </div>
 
