@@ -162,7 +162,7 @@ footer {
   font-size: 0.7rem;
   color: var(--footer-color);
   opacity: 0;
-  z-index: 1000;
+  z-index: 50;
   animation: fadeInUp 1s ease-out 2s forwards;
 }
 
