@@ -86,14 +86,15 @@ export default function Home() {
   const panelRef = useRef<HTMLDivElement>(null);
   const [footerVisible, setFooterVisible] = useState(false);
   const [showCrosshair, setShowCrosshair] = useState(false);
-  const [kleinBlue, setKleinBlue] = useState(false);
+  const [blueMode, setBlueMode] = useState<false | "klein" | "deep">(false);
 
   useEffect(() => {
-    document.body.style.backgroundColor = kleinBlue ? "#1A21FF" : "";
-  }, [kleinBlue]);
+    const colors = { klein: "#1A21FF", deep: "#1E1CC3" };
+    document.body.style.backgroundColor = blueMode ? colors[blueMode] : "";
+  }, [blueMode]);
 
   useEffect(() => {
-    if (kleinBlue) setKleinBlue(false);
+    if (blueMode) setBlueMode(false);
   }, [theme]);
   const mousePosRef = useRef({ x: 0, y: 0 });
   const lerpPosRef = useRef({ x: 0, y: 0 });
@@ -158,8 +159,8 @@ export default function Home() {
         case "1": window.open("https://ledgerdrift.com", "_blank"); break;
         case "2": window.open("https://handbook.fintechengineer.io", "_blank"); break;
         case "3": window.open("https://grimoire.fintechengineer.io", "_blank"); break;
-        case "k":
-        case "K": setKleinBlue(prev => !prev); break;
+        case "k": setBlueMode(prev => prev === "deep" ? false : "deep"); break;
+        case "K": setBlueMode(prev => prev === "klein" ? false : "klein"); break;
         case "Escape":
         case "Backspace":
         case "Delete": setActivePanel(null); break;
