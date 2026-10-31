@@ -91,6 +91,10 @@ export default function Home() {
   useEffect(() => {
     document.body.style.backgroundColor = kleinBlue ? "#1A21FF" : "";
   }, [kleinBlue]);
+
+  useEffect(() => {
+    if (kleinBlue) setKleinBlue(false);
+  }, [theme]);
   const mousePosRef = useRef({ x: 0, y: 0 });
   const lerpPosRef = useRef({ x: 0, y: 0 });
   const [lerpPos, setLerpPos] = useState({ x: 0, y: 0 });
