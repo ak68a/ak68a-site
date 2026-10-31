@@ -25,10 +25,6 @@ const services = [
     name: "Systems Architecture",
     description: "Design and build financial infrastructure from scratch or restructure what's there.",
   },
-  {
-    name: "Due Diligence",
-    description: "Technical assessment for investors, acquirers, or partners.",
-  },
 ];
 
 const clients = {
