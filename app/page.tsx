@@ -219,13 +219,8 @@ export default function Home() {
           <br />
           <div className="container">
             <p>
-              AI/ML engineer & CTO building intelligent systems
+              Applied AI/ML Researcher & Engineer building intelligent systems
               for financial infrastructure.
-            </p>
-            <p>
-              I build AI-driven systems for fintech — fraud
-              detection, compliance automation, and intelligent
-              infrastructure for teams at scale.
             </p>
           </div>
 
