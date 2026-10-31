@@ -21,10 +21,6 @@ const services = [
     name: "Fractional CTO",
     description: "Part-time technical leadership for startups that need a CTO but not a full-time one. Architecture decisions, team buildout, engineering culture, vendor evaluation, and board-level technical strategy.",
   },
-  {
-    name: "Systems Architecture",
-    description: "Design and build financial infrastructure from scratch or restructure what's there.",
-  },
 ];
 
 const clients = {
