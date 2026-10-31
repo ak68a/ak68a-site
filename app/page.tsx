@@ -88,13 +88,22 @@ export default function Home() {
   const [showCrosshair, setShowCrosshair] = useState(false);
   const [blueMode, setBlueMode] = useState<false | "klein" | "bright">(false);
 
+  const prevThemeRef = useRef(theme);
+
   useEffect(() => {
     const colors = { klein: "#1E1CC3", bright: "#1A21FF" };
     document.body.style.backgroundColor = blueMode ? colors[blueMode] : "";
+    if (blueMode) {
+      prevThemeRef.current = theme;
+      document.documentElement.setAttribute("data-theme", "dark");
+    }
   }, [blueMode]);
 
   useEffect(() => {
-    if (blueMode) setBlueMode(false);
+    if (blueMode) {
+      setBlueMode(false);
+      document.body.style.backgroundColor = "";
+    }
   }, [theme]);
   const mousePosRef = useRef({ x: 0, y: 0 });
   const lerpPosRef = useRef({ x: 0, y: 0 });
