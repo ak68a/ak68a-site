@@ -89,7 +89,6 @@ export default function Home() {
   const [kleinBlue, setKleinBlue] = useState(false);
 
   useEffect(() => {
-    document.body.style.transition = "background-color 0.6s ease";
     document.body.style.backgroundColor = kleinBlue ? "#1A21FF" : "";
   }, [kleinBlue]);
   const mousePosRef = useRef({ x: 0, y: 0 });
@@ -195,8 +194,7 @@ export default function Home() {
       <div className={`site-layout ${activePanel ? "panel-open" : ""} ${showCrosshair ? "crosshair-visible" : ""}`}
         style={{
           opacity: visible ? 1 : 0,
-          transition: "opacity 1s ease, background-color 0.6s ease",
-          backgroundColor: kleinBlue ? "#1A21FF" : undefined,
+          transition: "opacity 1s ease",
         }}
       >
         <header className="header">
