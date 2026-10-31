@@ -276,7 +276,7 @@ export default function Home() {
           <div className="copyright">&copy; 2030 ak68a</div>
         </div>
 
-        <div ref={panelRef} className={`right-panel ${activePanel ? "right-panel-open" : ""}`} style={blueMode ? { backgroundColor: blueMode === "klein" ? "#1E1CC3" : "#1A21FF" } : undefined}>
+        <div ref={panelRef} className={`right-panel ${activePanel ? "right-panel-open" : ""}`}>
           {displayPanel === "consult" && (
             <div className="panel-content">
               <h4 className="panel-title">/consult</h4>
