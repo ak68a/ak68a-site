@@ -273,7 +273,7 @@ export default function Home() {
           <footer className="footer" style={{ opacity: footerVisible ? 1 : 0, transition: "opacity 0.6s ease" }}>
             AK68A RA= 12h 56.7m, Dec= +21&deg; 41&prime;
           </footer>
-          <div className="copyright" style={{ opacity: activePanel ? 0 : undefined, pointerEvents: activePanel ? "none" : undefined }}>&copy; 2030 ak68a</div>
+          <div className="copyright" style={activePanel ? { opacity: 0, pointerEvents: "none", animation: "none" } : undefined}>&copy; 2030 ak68a</div>
         </div>
 
         <div ref={panelRef} className={`right-panel ${activePanel ? "right-panel-open" : ""}`}>
