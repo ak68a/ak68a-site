@@ -86,6 +86,12 @@ export default function Home() {
   const panelRef = useRef<HTMLDivElement>(null);
   const [footerVisible, setFooterVisible] = useState(false);
   const [showCrosshair, setShowCrosshair] = useState(false);
+  const [kleinBlue, setKleinBlue] = useState(false);
+
+  useEffect(() => {
+    document.body.style.transition = "background-color 0.6s ease";
+    document.body.style.backgroundColor = kleinBlue ? "#1A21FF" : "";
+  }, [kleinBlue]);
   const mousePosRef = useRef({ x: 0, y: 0 });
   const lerpPosRef = useRef({ x: 0, y: 0 });
   const [lerpPos, setLerpPos] = useState({ x: 0, y: 0 });
@@ -149,6 +155,8 @@ export default function Home() {
         case "1": window.open("https://ledgerdrift.com", "_blank"); break;
         case "2": window.open("https://handbook.fintechengineer.io", "_blank"); break;
         case "3": window.open("https://grimoire.fintechengineer.io", "_blank"); break;
+        case "k":
+        case "K": setKleinBlue(prev => !prev); break;
         case "Escape":
         case "Backspace":
         case "Delete": setActivePanel(null); break;
@@ -187,7 +195,8 @@ export default function Home() {
       <div className={`site-layout ${activePanel ? "panel-open" : ""} ${showCrosshair ? "crosshair-visible" : ""}`}
         style={{
           opacity: visible ? 1 : 0,
-          transition: "opacity 1s ease",
+          transition: "opacity 1s ease, background-color 0.6s ease",
+          backgroundColor: kleinBlue ? "#1A21FF" : undefined,
         }}
       >
         <header className="header">
