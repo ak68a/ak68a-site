@@ -26,9 +26,16 @@
   --text-color: #d4d4d4;
   --link-shadow: rgba(100, 150, 255, 0.4);
   --footer-color: #888888;
-  --toggle-bg: transparent;
-  --toggle-border: #404040;
+  --toggle-border: rgba(255, 255, 255, 0.15);
   --desc-color: #999999;
+}
+
+.blue-klein {
+  --toggle-bg: #2A2FFF;
+}
+
+.blue-bright {
+  --toggle-bg: #2A2FFF;
 }
 
 * {

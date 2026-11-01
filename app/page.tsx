@@ -85,9 +85,11 @@ export default function Home() {
     if (blueMode) {
       document.body.style.backgroundColor = colors[blueMode];
       document.documentElement.classList.add("blue-mode");
+      document.documentElement.classList.toggle("blue-klein", blueMode === "klein");
+      document.documentElement.classList.toggle("blue-bright", blueMode === "bright");
     } else {
       document.body.style.backgroundColor = "";
-      document.documentElement.classList.remove("blue-mode");
+      document.documentElement.classList.remove("blue-mode", "blue-klein", "blue-bright");
     }
   }, [blueMode]);
 
