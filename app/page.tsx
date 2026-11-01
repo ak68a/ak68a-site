@@ -161,8 +161,8 @@ export default function Home() {
         case "1": window.open("https://ledgerdrift.com", "_blank"); break;
         case "2": window.open("https://handbook.fintechengineer.io", "_blank"); break;
         case "3": window.open("https://grimoire.fintechengineer.io", "_blank"); break;
-        case "k": setBlueMode(prev => prev === "klein" ? false : "klein"); break;
-        case "K": setBlueMode(prev => prev === "bright" ? false : "bright"); break;
+        case "k": setBlueMode(prev => prev === "bright" ? false : "bright"); break;
+        case "K": setBlueMode(prev => prev === "klein" ? false : "klein"); break;
         case "Escape":
         case "Backspace":
         case "Delete": setActivePanel(null); break;
