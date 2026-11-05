@@ -18,14 +18,14 @@ const robotoMono = Roboto_Mono({
 
 export const metadata: Metadata = {
   title: "AK68A",
-  description: "Applied AI/ML Researcher & Engineer building intelligent systems for financial infrastructure. Fraud detection, compliance automation, and AI-driven fintech at scale.",
+  description: "AI/ML Engineer building intelligent systems for financial infrastructure. Fraud detection, compliance automation, and AI-driven fintech at scale.",
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
   },
   openGraph: {
     title: "AK68A",
-    description: "Applied AI/ML Researcher & Engineer building intelligent systems for financial infrastructure. Fraud detection, compliance automation, and AI-driven fintech at scale.",
+    description: "AI/ML Engineer building intelligent systems for financial infrastructure. Fraud detection, compliance automation, and AI-driven fintech at scale.",
     url: "https://ak68a.co",
     siteName: "AK68A",
     images: [
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "AK68A",
-    description: "Applied AI/ML Researcher & Engineer building intelligent systems for financial infrastructure. Fraud detection, compliance automation, and AI-driven fintech at scale.",
+    description: "AI/ML Engineer building intelligent systems for financial infrastructure. Fraud detection, compliance automation, and AI-driven fintech at scale.",
     images: ["/social.png"],
   },
 };

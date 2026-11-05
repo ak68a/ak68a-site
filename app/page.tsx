@@ -233,7 +233,7 @@ export default function Home() {
           <br />
           <div className="container">
             <p>
-              Applied AI/ML Researcher & Engineer building intelligent systems
+              AI/ML Engineer building intelligent systems
               for financial infrastructure.
             </p>
           </div>
