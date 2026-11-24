@@ -32,16 +32,15 @@ const clients = {
     { name: "Tilt", url: "https://tilt.com" },
   ],
   startups: [
-    { name: "Clossir", url: "https://clossir.com" },
-    { name: "Magellan Payments", url: "https://magellanpayments.com/" },
-    { name: "Path Crypto", url: "https://www.pathcrypto.com/", note: "Acq. Gemini" },
     { name: "Catena", url: "https://catena.com/" },
     { name: "Radius", url: "https://www.radiustech.xyz/" },
-    { name: "GivEZ", url: "https://givezglobal.com/" },
+    { name: "volAI", url: "https://vol-ai.com/" },
+    { name: "Magellan Payments", url: "https://magellanpayments.com/" },
+    { name: "Path Crypto", url: "https://www.pathcrypto.com/", note: "Acq. Gemini" },
   ],
 };
 
-const ownWork = [
+const openSource = [
   {
     name: "x402",
     url: "https://www.x402.org",
@@ -60,11 +59,20 @@ const ownWork = [
     description:
       "Payment protocol for AI agents over MCP. Adds payment credentials and receipts to tool calls so agents can pay for services inside the message flow.",
   },
+];
+
+const ventures = [
   {
     name: "Clossir",
     url: "https://clossir.com",
     description:
       "Complete infrastructure for tokenized finance. Identity, compliance, assets, and vaults, one platform, every chain.",
+  },
+  {
+    name: "Trio",
+    url: "https://trio.dev",
+    description:
+      "Specialized fintech talent. Domain-expert engineers matched to your vertical, plus AI-powered vetting and placement.",
   },
 ];
 
@@ -159,8 +167,8 @@ export default function Home() {
       switch (e.key) {
         case "0": setActivePanel(prev => prev === "consult" ? null : "consult"); break;
         case "1": window.open("https://ledgerdrift.com", "_blank"); break;
-        case "2": window.open("https://handbook.fintechengineer.io", "_blank"); break;
-        case "3": window.open("https://grimoire.fintechengineer.io", "_blank"); break;
+        case "2": window.open("#", "_blank"); break;
+        case "3": window.open("https://fintechengineer.io", "_blank"); break;
         case "k": setBlueMode(prev => prev === "bright" ? false : "bright"); break;
         case "K": setBlueMode(prev => prev === "klein" ? false : "klein"); break;
         case "Escape":
@@ -257,14 +265,14 @@ export default function Home() {
             </li>
             <li>
               [2]{" "}
-              <a href="https://handbook.fintechengineer.io" target="_blank" rel="noopener noreferrer">
-                /handbook
+              <a href="#" target="_blank" rel="noopener noreferrer">
+                /systems
               </a>
             </li>
             <li>
               [3]{" "}
-              <a href="https://grimoire.fintechengineer.io" target="_blank" rel="noopener noreferrer">
-                /grimoire
+              <a href="https://fintechengineer.io" target="_blank" rel="noopener noreferrer">
+                /resources
               </a>
             </li>
           </ul>
@@ -297,9 +305,25 @@ export default function Home() {
               </div>
 
               <div className="consult-own-work">
-                <h5 className="consult-section-title">Open Source & Personal</h5>
+                <h5 className="consult-section-title">Open Source</h5>
                 <ul className="panel-project-list">
-                  {ownWork.map((project) => (
+                  {openSource.map((project) => (
+                    <li key={project.name} className="project-item">
+                      <span className="project-name">
+                        {project.url ? (
+                          <a href={project.url} target="_blank" rel="noopener noreferrer">{project.name}</a>
+                        ) : project.name}
+                      </span>
+                      <span className="project-desc">{project.description}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="consult-own-work">
+                <h5 className="consult-section-title">Ventures</h5>
+                <ul className="panel-project-list">
+                  {ventures.map((project) => (
                     <li key={project.name} className="project-item">
                       <span className="project-name">
                         {project.url ? (
@@ -339,15 +363,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="consult-trio">
-                <h5 className="consult-section-title">Trio</h5>
-                <p className="trio-desc">
-                  Staffing, recruiting, and software development for fintech teams.{" "}
-                  <a href="https://trio.dev" target="_blank" rel="noopener noreferrer">trio.dev</a>
-                </p>
-              </div>
-
-              <div className="consult-contact">
+<div className="consult-contact">
                 <h5 className="consult-section-title">Get in Touch</h5>
                 <p className="contact-desc">
                   <a href="mailto:hey@ak68a.co">hey@ak68a.co</a>
