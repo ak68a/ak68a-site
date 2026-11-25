@@ -72,7 +72,7 @@ const ventures = [
     name: "Trio",
     url: "https://trio.dev",
     description:
-      "Specialized fintech talent. Domain-expert engineers matched to your vertical, plus AI-powered vetting and placement.",
+      "AI-powered vetting platform and specialized fintech staffing for engineering teams.",
   },
 ];
 
